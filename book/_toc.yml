@@ -1,0 +1,13 @@
+format: jb-book
+root: docs/index
+chapters:
+- file: docs/Topic Classification
+# section:(하위 페이지를 작성하고 싶은 경우)
+#  - file: docs/(작성한 파일 이름 작성)
+- file: docs/Semantic Textual Similarity
+- file: docs/Natural language inference
+- file: docs/Named entity recognition
+- file: docs/Relation extraction
+- file: docs/Dependency Parsing
+- file: docs/Machine Reading Comprehension
+- file: docs/Dialogue State Tracking

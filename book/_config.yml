@@ -1,0 +1,33 @@
+title : PseudoLab klue-baseline
+author: PseudoLab
+logo: 'PseudoLab_logo.png'
+
+# Short description about the book
+description: >-
+  baseline to experience klue benchmark
+
+execute:
+  execute_notebooks           : off
+
+# HTML-specific settings
+html:
+  home_page_in_navbar         : false
+
+# Interact link settings
+notebook_interface            : "notebook"
+
+# Launch button settings
+repository:
+  url                         : https://github.com/Pseudo-Lab/klue-baseline
+  path_to_book                : "book"
+
+# LaTeX settings
+latex:
+  latex_engine                : "xelatex"
+  latex_documents:
+    targetname: book.tex
+
+html:
+  favicon: 'PseudoLab_logo.png'
+  use_issues_button: true
+  use_repository_button: true
