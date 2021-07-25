@@ -22,12 +22,11 @@
 
 - 페이지 작성 파일 이동
 
-  - `pytorch-guide/book/docs` 에 위치시킬 것
-  - `ch1` 폴더 내에 작성
+  - `klue-baseline/book/docs` 에 위치시킬 것
 
 - `_toc.yml` 변경
 
-  - `pytorch-guide/book` 내 `_toc.yml` 파일 변경
+  - `klue-baseline/book` 내 `_toc.yml` 파일 변경
 
   - ```yaml
     format: jb-book
