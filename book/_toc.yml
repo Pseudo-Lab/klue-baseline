@@ -2,10 +2,15 @@ format: jb-book
 root: docs/index
 chapters:
 - file: docs/Topic Classification
-# section:(하위 페이지를 작성하고 싶은 경우)
-#  - file: docs/(작성한 파일 이름 작성)
 - file: docs/Semantic Textual Similarity
 - file: docs/Natural language inference
+  sections:
+  - file: docs/nli/NLI task
+  - file: docs/nli/Init
+  - file: docs/nli/Data Loading
+  - file: docs/nli/Data Processing
+  - file: docs/nli/Fine tuning
+  - file: docs/nli/Training
 - file: docs/Named entity recognition
 - file: docs/Relation extraction
 - file: docs/Dependency Parsing
