@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Relation extraction &#8212; PseudoLab klue-baseline</title>
+    <title>Classification &#8212; PseudoLab 3rd PyTorch guide</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -37,7 +37,6 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
@@ -53,8 +52,7 @@
     <link rel="shortcut icon" href="../_static/PseudoLab_logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="CNN (Convolutional Neural Network)" href="Dependency%20Parsing.html" />
-    <link rel="prev" title="Named entity recognition" href="Named%20entity%20recognition.html" />
+    <link rel="prev" title="[가짜연구소 3기] PyTorch 가이드" href="index.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -76,7 +74,7 @@
       <img src="../_static/PseudoLab_logo.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">PseudoLab klue-baseline</h1>
+      <h1 class="site-logo" id="site-title">PseudoLab 3rd PyTorch guide</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -84,52 +82,10 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="index.html">
-   **[가짜연구소 3기] KLUE 로 모델 평가하기 **
-  </a>
- </li>
-</ul>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="Topic%20Classification.html">
-   Topic Classification
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Semantic%20Textual%20Similarity.html">
-   Semantic Textual Similarity
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Natural%20language%20inference.html">
-   Natural language inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Named%20entity%20recognition.html">
-   Named entity recognition
-  </a>
- </li>
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Relation extraction
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Dependency%20Parsing.html">
-   CNN (Convolutional Neural Network)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Machine%20Reading%20Comprehension.html">
-   CNN (Convolutional Neural Network)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Dialogue%20State%20Tracking.html">
-   Dialogue State Tracking
+   Classification
   </a>
  </li>
 </ul>
@@ -173,9 +129,9 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/docs/Relation extraction.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/docs/Classification.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
+                data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
             onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
@@ -189,11 +145,11 @@
         aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
-            href="https://github.com/Pseudo-Lab/klue-baseline"><button type="button" class="btn btn-secondary topbarbtn"
+            href="https://github.com/Pseudo-Lab/pytorch-guide"><button type="button" class="btn btn-secondary topbarbtn"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/Pseudo-Lab/klue-baseline/issues/new?title=Issue%20on%20page%20%2Fdocs/Relation extraction.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/Pseudo-Lab/pytorch-guide/issues/new?title=Issue%20on%20page%20%2Fdocs/Classification.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -209,23 +165,6 @@
 
             <!-- Launch buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/Pseudo-Lab/klue-baseline/master?urlpath=tree/book/docs/Relation extraction.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
-
         </div>
 
         <!-- Table of contents -->
@@ -238,7 +177,7 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id1">
-   1. 예시
+   1. (예시)
   </a>
  </li>
 </ul>
@@ -252,26 +191,13 @@
         
               <div>
                 
-  <div class="section" id="relation-extraction">
-<h1>Relation extraction<a class="headerlink" href="#relation-extraction" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="classification">
+<h1>Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
-<h2>1. 예시<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>1. (예시)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>(본문 예시)</p></li>
-<li><p>.ipynb 형식입니다.</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>test
-</pre></div>
-</div>
-</div>
-</div>
 </div>
 </div>
 
@@ -300,8 +226,7 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="Named%20entity%20recognition.html" title="previous page">Named entity recognition</a>
-    <a class='right-next' id="next-link" href="Dependency%20Parsing.html" title="next page">CNN (Convolutional Neural Network)</a>
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">[가짜연구소 3기] PyTorch 가이드</a>
 
         </div>
         
