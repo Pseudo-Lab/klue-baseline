@@ -3,14 +3,7 @@ root: docs/index
 chapters:
 - file: docs/Topic Classification
 - file: docs/Semantic Textual Similarity
-- file: docs/Natural language inference
-  sections:
-  - file: docs/nli/NLI task
-  - file: docs/nli/Init
-  - file: docs/nli/Data Loading
-  - file: docs/nli/Data Processing
-  - file: docs/nli/Fine tuning
-  - file: docs/nli/Training
+- file: docs/Natural Language Inference
 - file: docs/Named entity recognition
 - file: docs/Relation extraction
 - file: docs/Dependency Parsing
