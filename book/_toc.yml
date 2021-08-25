@@ -2,8 +2,12 @@ format: jb-book
 root: docs/index
 chapters:
 - file: docs/Topic Classification
+  sections:
+  - file: docs/TC-1
 - file: docs/Semantic Textual Similarity
 - file: docs/Natural Language Inference
+  sections:
+  - file: docs/NLI-1
 - file: docs/Named entity recognition
 - file: docs/Relation extraction
 - file: docs/Dependency Parsing
