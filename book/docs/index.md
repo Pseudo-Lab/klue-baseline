@@ -20,22 +20,22 @@
 
 본 자료는 가짜연구소 3기 **KLUE 로 모델 평가하기 크루** 활동으로 제작되었습니다.
 
-| 기수           | 크루명                     | 크루원                                                       | 활동 일자                      |
-| -------------- | -------------------------- | ------------------------------------------------------------ | ------------------------------ |
-| 가짜연구소 3기 | KLUE 로 모델 평가하기 크루 | 권지현 김대웅 김보석 김정윤 송지현 오윤선 윤주성 이승미 전명준 | 2021.07.21 ~ 2021.09.22 (예정) |
+| 기수           | 크루명                     | 크루원                                                       | 활동 일자               |
+| -------------- | -------------------------- | ------------------------------------------------------------ | ----------------------- |
+| 가짜연구소 3기 | KLUE 로 모델 평가하기 크루 | [권지현](https://github.com/Jihyun22) [김대웅](https://github.com/KimDaeUng) [김보석](https://github.com/BOSOEK) [김정윤](https://github.com/skyepodium) [송지현](https://github.com/sang0179) [오윤선](https://github.com/Sunny-Michelle) [윤주성](https://github.com/eagle705) [이승미](https://github.com/krorina1013) [전명준](https://github.com/oncores) | 2021.07.21 ~ 2021.09.30 |
 
-**KLUE로 모델 평가하기** 크루는 KLUE 벤치마크를 경험하는 것이 주 목표입니다.  8개의 과제에 대한 baseline 을 작성하고 KLUE 벤치마크로 평가해보려 합니다.  과연 리더보드에 기록될 수 있을까요 ? 
+**KLUE로 모델 평가하기** 크루는 KLUE 벤치마크를 경험하는 것이 주 목표입니다.  8개의 과제에 대해 baseline  code 를 구성하고 KLUE 벤치마크로 평가해보려 합니다.  Task 별 주요 담당자는 다음과 같습니다.
 
-| Index |             task              |  담당자 (예)  | 기여자 (예)                                      |
-| :---: | :---------------------------: | :-----------: | ------------------------------------------------ |
-|  01   |     Topic Classification      | 권지현 김대웅 | 김보석 김정윤 송지현 오윤선 윤주성 이승미 전명준 |
-|  02   |  Semantic Textual Similarity  | 김보석 김정윤 | 권지현 김대웅 송지현 오윤선 윤주성 이승미 전명준 |
-|  03   |  Natural language inference   | 송지현 오윤선 | 권지현 김대웅 김보석 김정윤 윤주성 이승미 전명준 |
-|  04   |   Named entity recognition    | 이승미 전명준 | 권지현 김대웅 김보석 김정윤 송지현 오윤선 윤주성 |
-|  05   |      Relation extraction      | 권지현 김대웅 | 김보석 김정윤 송지현 오윤선 윤주성 이승미 전명준 |
-|  06   |      Dependency Parsing       | 김보석 김정윤 | 권지현 김대웅 송지현 오윤선 윤주성 이승미 전명준 |
-|  07   | Machine Reading Comprehension | 송지현 오윤선 | 권지현 김대웅 김보석 김정윤 윤주성 이승미 전명준 |
-|  08   |    Dialogue State Tracking    | 이승미 전명준 | 권지현 김대웅 김보석 김정윤 송지현 오윤선 윤주성 |
+| Index |             Task              |                      Topic                      | 담당자                                                       |
+| :---: | :---------------------------: | :---------------------------------------------: | ------------------------------------------------------------ |
+|  01   |  Topic Classification (YNAT)  | HuggingFace Hub 을 활용한 Fine tuning Baseline  | [김대웅](https://github.com/KimDaeUng) [오윤선](https://github.com/Sunny-Michelle) [김정윤](https://github.com/skyepodium) |
+|  02   |  Semantic Textual Similarity  |                                                 | [김대웅](https://github.com/KimDaeUng)                       |
+|  03   |  Natural language inference   | Tokenizer 별 성능을 비교한 Fine tuning Baseline | [권지현](https://github.com/Jihyun22)                        |
+|  04   |   Named entity recognition    |                                                 | [전명준](https://github.com/oncores) [오윤선](https://github.com/Sunny-Michelle) [윤주성](https://github.com/eagle705) |
+|  05   |      Relation extraction      |                                                 | [김보석](https://github.com/BOSOEK) [이승미](https://github.com/krorina1013) |
+|  06   |      Dependency Parsing       |   Model 별 성능을 비교한 Fine tuning Baseline   | [권지현](https://github.com/Jihyun22)                        |
+|  07   | Machine Reading Comprehension |                                                 | [송지현](https://github.com/sang0179) [김보석](https://github.com/BOSOEK) |
+|  08   | Dialogue State Tracking (Wos) | 공식 KLUE github 을 활용한 Fine tuning Baseline | [송지현](https://github.com/sang0179) [이승미](https://github.com/krorina1013) |
 
 </br>
 
