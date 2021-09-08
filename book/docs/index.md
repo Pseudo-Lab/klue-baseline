@@ -1,10 +1,12 @@
+<!-- #region -->
+---
 # **[가짜연구소 3기] KLUE로 모델 평가하기**
 
----
 
 ## **KLUE 로 모델 평가하기**
 
 ---
+<!-- #endregion -->
 
 **KLUE 로 모델 평가하기** 는 
 
@@ -37,9 +39,9 @@ Task 별 주요 담당자는 다음과 같습니다.
 |  03   |  Natural language inference   | 'Weight & Biase 을 활용한 Tokenizer 별 성능 비교' | [권지현](https://github.com/Jihyun22)                        |
 |  04   |   Named entity recognition    |                                                   | [전명준](https://github.com/oncores) [오윤선](https://github.com/Sunny-Michelle) |
 |  05   |      Relation extraction      |                                                   | [김보석](https://github.com/BOSOEK) [이승미](https://github.com/krorina1013) |
-|  06   |      Dependency Parsing       |                                                   | [권지현](https://github.com/Jihyun22)                        |
+|  06   |      Dependency Parsing       | 'pytorch Lightning 사용기' | [권지현](https://github.com/Jihyun22)                        |
 |  07   | Machine Reading Comprehension |                                                   | [송지현](https://github.com/sang0179) [김보석](https://github.com/BOSOEK) |
-|  08   | Dialogue State Tracking (Wos) |                                                   | [송지현](https://github.com/sang0179) [이승미](https://github.com/krorina1013) |
+|  08   | Dialogue State Tracking (Wos) |                                                   | [송지현](https://github.com/sang0179) [이승미](https://github.com/krorina1013)[전명준](https://github.com/oncores) |
 
 
 
