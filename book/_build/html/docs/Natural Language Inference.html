@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Relation extraction &#8212; PseudoLab klue-baseline</title>
+    <title>Natural Language Inference &#8212; PseudoLab klue-baseline</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -52,8 +52,8 @@
     <link rel="shortcut icon" href="../_static/PseudoLab_logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Dependency Parsing" href="Dependency%20Parsing.html" />
-    <link rel="prev" title="Named entity recognition" href="Named%20entity%20recognition.html" />
+    <link rel="next" title="Weight &amp; Biase 을 활용한 Tokenizer 별 성능 비교" href="NLI-1.html" />
+    <link rel="prev" title="STS(Semantic Textual Similarity)" href="Semantic%20Textual%20Similarity.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -113,11 +113,11 @@
    STS(Semantic Textual Similarity)
   </a>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="Natural%20Language%20Inference.html">
+ <li class="toctree-l1 current active has-children">
+  <a class="current reference internal" href="#">
    Natural Language Inference
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
@@ -135,8 +135,8 @@
    Named entity recognition
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Relation%20extraction.html">
    Relation extraction
   </a>
  </li>
@@ -196,7 +196,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/docs/Relation extraction.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/docs/Natural Language Inference.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -216,7 +216,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/Pseudo-Lab/klue-baseline/issues/new?title=Issue%20on%20page%20%2Fdocs/Relation extraction.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/Pseudo-Lab/klue-baseline/issues/new?title=Issue%20on%20page%20%2Fdocs/Natural Language Inference.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -237,7 +237,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/Pseudo-Lab/klue-baseline/master?urlpath=tree/book/docs/Relation extraction.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Pseudo-Lab/klue-baseline/master?urlpath=tree/book/docs/Natural Language Inference.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -260,8 +260,13 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
-   1. 예시
+  <a class="reference internal nav-link" href="#klue-nli-task">
+   KLUE-NLI task
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notebook-list">
+   Notebook List
   </a>
  </li>
 </ul>
@@ -275,26 +280,55 @@
         
               <div>
                 
-  <div class="section" id="relation-extraction">
-<h1>Relation extraction<a class="headerlink" href="#relation-extraction" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="id1">
-<h2>1. 예시<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="natural-language-inference">
+<h1>Natural Language Inference<a class="headerlink" href="#natural-language-inference" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li><p>(본문 예시)</p></li>
-<li><p>.ipynb 형식입니다.</p></li>
+<li><p>본 자료는 가짜연구소 3기 KLUE 로 모델 평가하기 크루 활동으로 작성되었습니다.</p></li>
+<li><p>공식 KLUE 자료를 참고하여 진행되었습니다.</p>
+<ul>
+<li><p><a class="reference external" href="https://klue-benchmark.com/">klue 홈페이지 (공식)</a></p></li>
+<li><p><a class="reference external" href="https://github.com/KLUE-benchmark/KLUE-baseline">klue github (공식)</a></p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
-</pre></div>
+</li>
+</ul>
+<hr class="docutils" />
+<div class="section" id="klue-nli-task">
+<h2>KLUE-NLI task<a class="headerlink" href="#klue-nli-task" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>목표 : 전제(premise)로 주어진 텍스트와 가설(hypothesis)로 주어진 텍스트 간의 관계를 추론</p></li>
+<li><p>데이터 구성 : 위키트리, 정책 뉴스 브리핑 자료, 위키뉴스, 위키피디아, 네이버 영화 리뷰, 에어비앤비 리뷰 등에서 조건에 부합하는 10000개의 전제를 추출, 약 30000개의 문장 쌍을 구성</p></li>
+<li><p>label :</p>
+<ol class="simple">
+<li><p>전제와 가설간의 관계는 가설이 참인 경우(entailment)</p></li>
+<li><p>가설이 거짓인 경우(contradiction)</p></li>
+<li><p>가설이 참 일수도 있고 아닐 수도 있는 경우(neutral)로 라벨링</p></li>
+</ol>
+</li>
+</ul>
 </div>
+<hr class="docutils" />
+<div class="section" id="notebook-list">
+<h2>Notebook List<a class="headerlink" href="#notebook-list" title="Permalink to this headline">¶</a></h2>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Index</p></th>
+<th class="head"><p>Task</p></th>
+<th class="head"><p>Topic</p></th>
+<th class="head"><p>담당자</p></th>
+<th class="head"><p>작성일</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>03-1</p></td>
+<td><p>Natural language inference</p></td>
+<td><p>Weight &amp; Biase 을 활용한 Tokenizer 별 성능 비교</p></td>
+<td><p><a class="reference external" href="https://github.com/Jihyun22">권지현</a></p></td>
+<td><p>21-08-18</p></td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>test
-</pre></div>
-</div>
-</div>
-</div>
+<div class="toctree-wrapper compound">
 </div>
 </div>
 
@@ -328,19 +362,19 @@
 <div class='prev-next-bottom'>
     
     <div id="prev">
-        <a class="left-prev" href="Named%20entity%20recognition.html" title="previous page">
+        <a class="left-prev" href="Semantic%20Textual%20Similarity.html" title="previous page">
             <i class="prevnext-label fas fa-angle-left"></i>
             <div class="prevnext-info">
                 <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">Named entity recognition</p>
+                <p class="prevnext-title">STS(Semantic Textual Similarity)</p>
             </div>
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="Dependency%20Parsing.html" title="next page">
+        <a class="right-next" href="NLI-1.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Dependency Parsing</p>
+                <p class="prevnext-title">Weight &amp; Biase 을 활용한 Tokenizer 별 성능 비교</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>

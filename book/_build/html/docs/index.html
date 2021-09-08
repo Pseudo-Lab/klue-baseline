@@ -22,8 +22,8 @@
       
 
     
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -37,13 +37,12 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
         const thebe_selector_input = "pre"
@@ -53,7 +52,7 @@
     <link rel="shortcut icon" href="../_static/PseudoLab_logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Topic Classification" href="Topic%20Classification.html" />
+    <link rel="next" title="YNAT(Topic Classification)" href="Topic%20Classification.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -81,7 +80,7 @@
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
  <li class="toctree-l1 current">
@@ -91,20 +90,44 @@
  </li>
 </ul>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="Topic%20Classification.html">
-   Topic Classification
+   YNAT(Topic Classification)
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="TC-1.html">
+     HuggingFace Hub 을 활용한 Fine tuning Baseline
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Semantic%20Textual%20Similarity.html">
-   Semantic Textual Similarity
+   STS(Semantic Textual Similarity)
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Natural%20language%20inference.html">
-   Natural language inference
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="Natural%20Language%20Inference.html">
+   Natural Language Inference
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NLI-1.html">
+     Weight &amp; Biase 을 활용한 Tokenizer 별 성능 비교
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Named%20entity%20recognition.html">
@@ -216,7 +239,7 @@
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
             </div>
-            <nav id="bd-toc-nav">
+            <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id1">
@@ -279,60 +302,61 @@
 <tbody>
 <tr class="row-even"><td><p>가짜연구소 3기</p></td>
 <td><p>KLUE 로 모델 평가하기 크루</p></td>
-<td><p>권지현 김대웅 김보석 김정윤 송지현 오윤선 윤주성 이승미 전명준</p></td>
-<td><p>2021.07.21 ~ 2021.09.22 (예정)</p></td>
+<td><p><a class="reference external" href="https://github.com/Jihyun22">권지현</a> <a class="reference external" href="https://github.com/KimDaeUng">김대웅</a> <a class="reference external" href="https://github.com/BOSOEK">김보석</a> <a class="reference external" href="https://github.com/skyepodium">김정윤</a> <a class="reference external" href="https://github.com/sang0179">송지현</a> <a class="reference external" href="https://github.com/Sunny-Michelle">오윤선</a> <a class="reference external" href="https://github.com/eagle705">윤주성</a> <a class="reference external" href="https://github.com/krorina1013">이승미</a> <a class="reference external" href="https://github.com/oncores">전명준</a></p></td>
+<td><p>2021.07.21 ~ 2021.09.30</p></td>
 </tr>
 </tbody>
 </table>
-<p><strong>KLUE로 모델 평가하기</strong> 크루는 KLUE 벤치마크를 경험하는 것이 주 목표입니다.  8개의 과제에 대한 baseline 을 작성하고 KLUE 벤치마크로 평가해보려 합니다.  과연 리더보드에 기록될 수 있을까요 ?</p>
+<p><strong>KLUE로 모델 평가하기</strong> 크루는 KLUE 벤치마크를 경험하는 것이 주 목표입니다.  8개의 과제에 대해 baseline  code 를 구성하고 KLUE 벤치마크로 평가해보려 합니다.</p>
+<p>Task 별 주요 담당자는 다음과 같습니다.</p>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="text-align:center head"><p>Index</p></th>
-<th class="text-align:center head"><p>task</p></th>
-<th class="text-align:center head"><p>담당자 (예)</p></th>
-<th class="head"><p>기여자 (예)</p></th>
+<th class="text-align:center head"><p>Task</p></th>
+<th class="head"><p>Topic</p></th>
+<th class="head"><p>담당자</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td class="text-align:center"><p>01</p></td>
-<td class="text-align:center"><p>Topic Classification</p></td>
-<td class="text-align:center"><p>권지현 김대웅</p></td>
-<td><p>김보석 김정윤 송지현 오윤선 윤주성 이승미 전명준</p></td>
+<td class="text-align:center"><p>YNAT (Topic Classification)</p></td>
+<td><p>‘HuggingFace Hub 을 활용한 Fine tuning Baseline’</p></td>
+<td><p><a class="reference external" href="https://github.com/KimDaeUng">김대웅</a> <a class="reference external" href="https://github.com/Sunny-Michelle">오윤선</a></p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:center"><p>02</p></td>
 <td class="text-align:center"><p>Semantic Textual Similarity</p></td>
-<td class="text-align:center"><p>김보석 김정윤</p></td>
-<td><p>권지현 김대웅 송지현 오윤선 윤주성 이승미 전명준</p></td>
+<td><p></p></td>
+<td><p><a class="reference external" href="https://github.com/KimDaeUng">김대웅</a></p></td>
 </tr>
 <tr class="row-even"><td class="text-align:center"><p>03</p></td>
 <td class="text-align:center"><p>Natural language inference</p></td>
-<td class="text-align:center"><p>송지현 오윤선</p></td>
-<td><p>권지현 김대웅 김보석 김정윤 윤주성 이승미 전명준</p></td>
+<td><p>‘Weight &amp; Biase 을 활용한 Tokenizer 별 성능 비교’</p></td>
+<td><p><a class="reference external" href="https://github.com/Jihyun22">권지현</a></p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:center"><p>04</p></td>
 <td class="text-align:center"><p>Named entity recognition</p></td>
-<td class="text-align:center"><p>이승미 전명준</p></td>
-<td><p>권지현 김대웅 김보석 김정윤 송지현 오윤선 윤주성</p></td>
+<td><p></p></td>
+<td><p><a class="reference external" href="https://github.com/oncores">전명준</a> <a class="reference external" href="https://github.com/Sunny-Michelle">오윤선</a></p></td>
 </tr>
 <tr class="row-even"><td class="text-align:center"><p>05</p></td>
 <td class="text-align:center"><p>Relation extraction</p></td>
-<td class="text-align:center"><p>권지현 김대웅</p></td>
-<td><p>김보석 김정윤 송지현 오윤선 윤주성 이승미 전명준</p></td>
+<td><p></p></td>
+<td><p><a class="reference external" href="https://github.com/BOSOEK">김보석</a> <a class="reference external" href="https://github.com/krorina1013">이승미</a></p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:center"><p>06</p></td>
 <td class="text-align:center"><p>Dependency Parsing</p></td>
-<td class="text-align:center"><p>김보석 김정윤</p></td>
-<td><p>권지현 김대웅 송지현 오윤선 윤주성 이승미 전명준</p></td>
+<td><p></p></td>
+<td><p><a class="reference external" href="https://github.com/Jihyun22">권지현</a></p></td>
 </tr>
 <tr class="row-even"><td class="text-align:center"><p>07</p></td>
 <td class="text-align:center"><p>Machine Reading Comprehension</p></td>
-<td class="text-align:center"><p>송지현 오윤선</p></td>
-<td><p>권지현 김대웅 김보석 김정윤 윤주성 이승미 전명준</p></td>
+<td><p></p></td>
+<td><p><a class="reference external" href="https://github.com/sang0179">송지현</a> <a class="reference external" href="https://github.com/BOSOEK">김보석</a></p></td>
 </tr>
 <tr class="row-odd"><td class="text-align:center"><p>08</p></td>
-<td class="text-align:center"><p>Dialogue State Tracking</p></td>
-<td class="text-align:center"><p>이승미 전명준</p></td>
-<td><p>권지현 김대웅 김보석 김정윤 송지현 오윤선 윤주성</p></td>
+<td class="text-align:center"><p>Dialogue State Tracking (Wos)</p></td>
+<td><p></p></td>
+<td><p><a class="reference external" href="https://github.com/sang0179">송지현</a> <a class="reference external" href="https://github.com/krorina1013">이승미</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -380,11 +404,23 @@
               </div>
               
         
-        <div class='prev-next-bottom'>
             
-    <a class='right-next' id="next-link" href="Topic%20Classification.html" title="next page">Topic Classification</a>
 
-        </div>
+
+
+<div class='prev-next-bottom'>
+    
+     <div id="next">
+        <a class="right-next" href="Topic%20Classification.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">YNAT(Topic Classification)</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
         
         </div>
     </div>

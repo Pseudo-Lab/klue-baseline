@@ -1,29 +1,46 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # STS(Semantic Textual Similarity)
-# - 수정일: 21-09-08
-# - 본 자료는 가짜연구소 3기 KLUE 로 모델 평가하기 크루 활동으로 작성됨 
-#   
+# # HuggingFace Hub 을 활용한 Fine tuning Baseline
 # 
-# - **이 노트북이 담고 있는 내용**
+# 
+# - Task : KLUE-YNAT
+# - 담당자: [김대웅](https://github.com/KimDaeUng) 님
+# - 최종수정일: 21-08-25
+# - 본 자료는 가짜연구소 3기 KLUE 로 모델 평가하기 크루 활동으로 작성됨
+# 
+# 
+# 
+# ## **이 노트북이 담고 있는 내용**
 #     - HuggingFace Datasets을 활용하여 KLUE 데이터셋 쉽게 전처리하기
 #     - HuggingFace Hub에서 사전학습된 언어 모델을 다운로드 받아 사용하고, 학습한 모델을 업로드하여 공유하기
 #     - `Trainer` 객체를 사용하여 모델 학습 및 평가 & hyperparameter search하기
 #     - [Weights & Biases](https://wandb.ai/)를 활용하여 실험 관리하기  
 # 
-
-# #00 STS task 설명
-# - **목표** : 두 문장의 의미 유사도(Semantic Similarity)를 0 (유사하지 않음) ~ 5 (매우 유사함) 점으로 예측함
 # 
-# - **데이터 구성** : 에어비앤비 리뷰(리뷰 도메인), 정책 브리핑(뉴스 도메인), ParaKQC(스마트스피커 도메인)에서 유사한 문장들(3 ~ 5점 분포)과 유사하지 않은 문장들(0~ 3점 분포)을 추출 혹은 생성
+# ## **앞으로 추가되어야할 내용**
+#     - Pretraining 직접 수행하기
+#         - 학습 코퍼스 수집 및 전처리
+#         - Pre-Tokenizer & Tokenizer
+#         - Pretraining
 # 
-# - **label**:
-#   - real-label: 0 ~ 5 의 실수값
-#   - label: 0(유사하지 않음), 1(유사함)
+#     - Data Augmentation
+#         - [Easy Data Augmentation(EDA)](https://arxiv.org/abs/1901.11196)
+#         - Back Translation
+#         - Summarization
+#     
+#     - Data Imbalance Problem
+#         - `imbalanced-learn` 라이브러리를 활용한 over, under sampling
+#         - Loss function: class weights 설정
+#     
+#     - 더 큰 배치사이즈로 학습하기
+#         - Mixed Precision을 이용한 학습
+#         - Single GPU에서 DeepSpeed 사용
 # 
-# - **train/val/test** : 11,668 /	519	1,037
-# 
+#     - 더 빠르게 학습하기 
+#         - TPU를 이용한 학습
+#         - Multi-GPU에서 DeepSpeed 사용
+#         
 # ---
 
 # # 01 Init
@@ -45,13 +62,7 @@
 get_ipython().system('pip install transformers datasets wandb')
 
 
-# In[ ]:
-
-
-
-
-
-# 본 노트북은 Transformers 4.10.0을 사용합니다.
+# 본 노트북은 Transformers 4.9.2을 사용합니다.
 
 # In[ ]:
 
@@ -65,10 +76,6 @@ print(transformers.__version__)
 # 
 # 그 다음, 아래 명령어를 실행시켜 Username과 Password를 입력합니다.
 
-# 학습한 모델을 커뮤니티에서 공유하거나, 다른 pretrained model 처럼 쉽게 불러와 사용하고 싶다면
-# 1. Hugging Face 웹사이트로부터 얻은 자신의 authentication token을 저장해야 합니다.(회원 가입이 필요하다면 [여기](https://huggingface.co/join)로)
-# 2. 그 다음 아래 셀들의 주석을 풀어서 아이디와 비밀번호를 입력해주세요
-
 # In[ ]:
 
 
@@ -81,17 +88,17 @@ get_ipython().system('huggingface-cli login')
 
 
 get_ipython().system('pip install hf-lfs')
-get_ipython().system('git config --global user.email "eliza.dukim@gmail.com"')
-get_ipython().system('git config --global user.name "DaeungKim"')
+get_ipython().system('git config --global user.email eliza.dukim@gmail.com')
+get_ipython().system('git config --global user.name KimDaeUng')
 
 
 # In[ ]:
 
 
 # argment setting
-task = "sts"
+task = "ynat"
 model_checkpoint = "klue/bert-base"
-batch_size = 128
+batch_size = 256
 
 
 # # 02 Data Loading
@@ -106,7 +113,7 @@ batch_size = 128
 
 
 from datasets import load_dataset
-dataset = load_dataset('klue', task) # klue 의 task=nil 을 load
+dataset = load_dataset('klue', 'ynat') # klue 의 task=nil 을 load
 dataset # dataset 구조 확인
 
 
@@ -122,14 +129,11 @@ dataset['train'][0]
 
 
 # KLUE TC (YNAT) task dataset 구조는 다음과 같습니다. 자세한 내용은 klue 공식 페이지 [링크](https://github.com/KLUE-benchmark/KLUE/wiki/KLUE-TC-(YNAT)-dataset-description)를 참조바랍니다.
-#   1. 'guid': index, 고유 식별자
-#   2. 'labels': 라벨
-#     - real-label : 0 ~ 5 사이의 문장 유사도의 실수값
-#     - label : real-label을 소수 둘째자리에서 반올림한 값
-#     - binary-label : real-label 값 기준 3 이상은 1, 미만은 1
-#   3. sentence1 : 첫 번째 문장 입력
-#   4. sentence2 : 두 번째 문장 입력
-#   5. 'source': 출처 코퍼스
+#   1. 'date' : 뉴스 기사의 발행일
+#   2. 'guid': index, 고유 식별자
+#   3. 'label': 라벨
+#   4. 'title': 뉴스 헤드라인
+#   5. 'url': 뉴스의 url
 # 
 # 각 column 구성을 임의의 샘플을 추출하여 살펴보겠습니다.
 
@@ -159,7 +163,7 @@ def show_random_elements(dataset, num_examples=10):
 show_random_elements(dataset["train"])
 
 
-# STS task 의 목적은 두 문장 `sentence1`, `sentence2`가 얼마나 유사한지 유사도를 실수값으로 출력하거나 또는 이진 분류(유사함, 유사하지 않음)하는 것입니다. 따라서 input 값은 `sentence1`, `sentence2`이며 피어슨 상관계수로 평가시에는 `labels.real-label`이 F1-score로 평가시에는 `labels.binary-label` 이 target 값으로 사용됩니다.
+# TC (YNAT) task 의 목적은 `title`이 어떤 토픽(Topic)에 속하는지 분류하는 것입니다. 따라서 input 값은 `title`이며 `label` 이 target 값으로 사용됩니다.
 # 
 # 다음은 데이터 전처리 과정을 살펴보겠습니다.
 # 
@@ -185,45 +189,33 @@ tokenizer = AutoTokenizer.from_pretrained(model_checkpoint, use_fast=True)
 
 # ## Data encoding
 # 
-# Tokenizer 는 문장 또는 문장 쌍을 입력하여 데이터에 대한 토크나이징을 수행할 수 있습니다.  
-# STS 태스크에서는 분류 대상 문장이 포함된 열인 'sentence1', 'sentence2'을 모델 입력으로 사용합니다.
+# Tokenizer 는 문장 또는 문장 쌍을 입력하여 데이터에 대한 토크나이징을 수행할 수 있습니다.
 
 # In[ ]:
 
 
-print(f"Sentence1: {dataset['train'][0]['sentence1']}\nSentence2: {dataset['train'][0]['sentence2']}")
-
-
-# YNAT과 다르게 데이터셋의 features로 `label` 대신 `labels`가 존재하며 하위 항목으로 `binary-label`, `label`, `real-label`를 갖습니다. 여기서는 피어슨 상관계수를 이용하여 모델을 학습시키기 위해 `real-label`이 `label`이 되도록 수정합니다.
-
-# In[ ]:
-
-
-dataset = dataset.flatten()
-dataset = dataset.rename_column('labels.real-label','label')
+dataset['train'][0]['title']
 
 
 # In[ ]:
 
 
-dataset
+tokenizer(dataset['train'][0]['title'])
 
-
-# 전처리를 위해 사용할 함수를 작성합니다. `tokenizer`의 입력으로 dataset의 'sentence1', 'sentence2' 열을 입력하면서 `truncation=True`를 설정하면됩니다.
-#  이 옵션은 모델이 입력 받을 수 있는 토큰 최대 길이를 벗어난 토큰들을 잘라주는 옵션입니다.
 
 # In[ ]:
 
 
-max_length = 512
+tokenizer(dataset['train'][0]['title']).tokens()
 
+
+# YNAT task 에서는 `title`을 input으로 사용합니다. tokenizer의 입력값을 고려하여 전처리를 수행할 함수를 정의합니다. `tokenizer`에서 `truncation=True`를 설정하면 모델이 입력 최대 길이를 벗어난 경우 잘라냅니다. 
 
 # In[ ]:
 
 
 def preprocess_function(examples):
-    return tokenizer(examples['sentence1'], examples['sentence2'],
-                     truncation=True, max_length=max_length, padding=True)
+    return tokenizer(examples['title'], truncation=True)
 
 
 # 이 함수를 전체 데이터셋의 문장에 적용시키기 위해서, `dataset` 객체의 `map` 메서드를 사용합니다. `batched=True` 옵션은 적용되는 함수가 배치형태로 처리가 가능한 함수인 경우에 체크하며, 멀티 쓰레딩을 사용해 텍스트 데이터를 배치 형태로 빠르게 처리할 수 있습니다.  
@@ -246,15 +238,26 @@ encoded_dataset = dataset.map(preprocess_function, batched=True)
 # ## Model load
 # 
 # Pretrained model을 다운 받아 fine tuning 을 진행할 수 있습니다. YNAT task는 분류와 관련한 task 이므로 , `AutoModelForSequenceClassification` 클래스를 사용합니다.
+# 
+# 이때, label 개수에 대한 설정이 필요합니다.
 
-# KLUE base 모델은 hugging face model hub (관련 사이트 [링크](https://huggingface.co/models)) 에 포팅되어 있으므로 model_checkpoint 경로를 정의하여 불러올 수 있습니다(`model_checkpoint = klue/bert-base` 로 사전 정의됨). 이때 label의 개수는 1로 설정합니다(STS task 는 단순 회귀문제 또는 이진 분류 문제이므로).
+# In[ ]:
+
+
+# YNAT Task의 label 개수: 7
+dataset['train'].features['label'].num_classes
+
+
+# YNAT task 는 총 7개의 label 로 구성되어 있습니다.
+# 
+# 다음으로 모델을 불러오겠습니다. KLUE base 모델은 hugging face model hub (관련 사이트 [링크](https://huggingface.co/models)) 에 포팅되어 있으므로 model_checkpoint 경로를 정의하여 불러올 수 있습니다(`model_checkpoint = klue/bert-base` 로 사전 정의됨).
 # 
 
 # In[ ]:
 
 
 from transformers import AutoModelForSequenceClassification, TrainingArguments, Trainer
-num_labels = 1
+num_labels = 7 # label 개수는 task 마다 달라질 수 있음
 model = AutoModelForSequenceClassification.from_pretrained(model_checkpoint,
                                                            num_labels=num_labels)
 
@@ -276,17 +279,17 @@ model = AutoModelForSequenceClassification.from_pretrained(model_checkpoint,
 import os
 
 model_name = model_checkpoint.split("/")[-1]
-output_dir = os.path.join("test-klue", "sts")
+output_dir = os.path.join("test-klue", "ynat") # task 별로 바꿔줄 것
 logging_dir = os.path.join(output_dir, 'logs')
 args = TrainingArguments(
     # checkpoint, 모델의 checkpoint 가 저장되는 위치
     output_dir=output_dir,
-    # overwrite_output_dir=True,
+    overwrite_output_dir=True,
 
     # Model Save & Load
     save_strategy = "epoch", # 'steps'
     load_best_model_at_end=True,
-    # save_steps = 500,
+    save_steps = 500,
 
 
     # Dataset, epoch 와 batch_size 선언
@@ -303,8 +306,9 @@ args = TrainingArguments(
     # max_grad_norm = 1.0,
     # label_smoothing_factor=0.1,
 
+
     # Evaluation 
-    metric_for_best_model='eval_pearsonr', # task 별 평가지표 변경 
+    metric_for_best_model='eval_f1', # task 별 평가지표 변경
     evaluation_strategy = "epoch",
 
     # HuggingFace Hub Upload, 모델 포팅을 위한 인자
@@ -322,41 +326,32 @@ args = TrainingArguments(
 
 # `TrainingArguments` 의 여러 인자 중 필수 인자는 `output_dir` 으로 모델의 checkpoint  가 저장되는 경로를 의미합니다.
 # 
-# 또한 task 별로 metric 지정이 필요합니다. STS task 는 피어슨 상관계수 또는 F1을 평가지표로 사용합니다.
-# 우선 metric 설정이 필요합니다. `datasets` 라이브러리에서 제공하는 evaluation metric의 리스트를 확인하겠습니다.
+# 또한 task 별로 metric 지정이 필요합니다. YNAT task 는 Macro-F1을 평가지표로 사용합니다.
+# 다음으로 `trainer` 객체를 정의하겠습니다. 우선 metric 설정이 필요합니다. `datasets` 라이브러리에서 제공하는 evaluation metric의 리스트를 확인하겠습니다.
 
 # In[ ]:
 
 
-# datasets 라이브러리에서 제공하는 Evaluation metric의 리스트를 확인합니다.
+# metric list 확인
 from datasets import list_metrics, load_metric
 metrics_list = list_metrics()
 len(metrics_list)
 print(', '.join(metric for metric in metrics_list))
 
 
-# In[ ]:
-
-
-# STS의 metric은 pearsonr, F1 score을 사용합니다. [TODO] F1 metric 추가
-metric_pearsonr = load_metric("pearsonr") # peason r
-# metric_f1 = load_metric("f1") # F1
-
+# 이 중, YNAT 에서는 `f1` 를 사용합니다. 해당 평가지표를 고려하여 metric 계산을 위한 함수를 정의하겠습니다.
 
 # In[ ]:
 
+
+# YNAT의 metric은 F1 score를 사용합니다.
+metric_macrof1 = load_metric('f1')
 
 def compute_metrics(eval_pred):
-    predictions, labels = eval_pred
-    predictions = predictions[:, 0]
-    pr = metric_pearsonr.compute(predictions=predictions,
-                                  references=labels)
-    return pr
-
-    # f1 = metric_f1.compute(predictions=predictions,
-    #                               references=labels)
-    # return {'pearsonr' : pr,
-    #         'f1' : f1}
+    predictions = eval_pred.predictions.argmax(-1)
+    labels = eval_pred.label_ids
+    return metric_macrof1.compute(predictions=predictions,
+                                  references=labels, average='macro')
 
 
 # 마지막으로 `Trainer` 객체를 정의하겠습니다.
@@ -421,10 +416,10 @@ print(id)
 # In[ ]:
 
 
-wandb.init(project='klue-sts', # 실험기록을 관리한 프로젝트 이름
-           entity='dukim',     # 사용자명 또는 팀 이름
-           id='3bso6955',      # 실험에 부여된 고유 아이디
-           name='sts',         # 실험에 부여한 이름
+wandb.init(project='klue', # 실험기록을 관리한 프로젝트 이름
+           entity='dukim', # 사용자명 또는 팀 이름
+           id='3bso6955',  # 실험에 부여된 고유 아이디
+           name='ynat',    # 실험에 부여한 이름               
           )
 
 
@@ -468,7 +463,7 @@ trainer.push_to_hub()
 
 from transformers import AutoModelForSequenceClassification
 # {HuggingFace Model Hub 사용자 아이디}/{push_to_hub_model_id에서 설정한 값}
-model = AutoModelForSequenceClassification.from_pretrained('eliza-dukim/bert-base-finetuned-sts', num_labels=num_labels)
+model = AutoModelForSequenceClassification.from_pretrained('eliza-dukim/bert-base-finetuned-ynat', num_labels=num_labels)
 
 
 # Submission을 위해 모델을 저장합니다.
@@ -543,82 +538,8 @@ print(id)
 wandb.init(project='klue', # 실험기록을 관리한 프로젝트 이름
            entity='dukim', # 사용자명 또는 팀 이름
            id='3bso6955',  # 실험에 부여된 고유 아이디
-         # name='sts',  # 실험에 이름을 부여하지 않으면 랜덤으로 생성함
+         # name='ynat',  # 실험에 이름을 부여하지 않으면 랜덤으로 생성함
           )
-
-
-# hyperparameter search 동안에 `Trainer`는 학습을 여러번 실행합니다. 따라서 모델이 매 학습마다 다시 초기화 될 수 있도록 모델이 함수에 의해 정의되도록 합니다.
-
-# In[ ]:
-
-
-def model_init():
-    return AutoModelForSequenceClassification.from_pretrained(model_checkpoint, num_labels=num_labels)
-
-
-# 그 다음, 모델을 직접 입력하는 대신 `model_init`으로 초기화하는 함수를 입력합니다. 나머지는 앞에서 했던 것과 거의 동일하게 `Trainer`를 초기화 해주었습니다.
-
-# 전체 데이터셋에 대해서 사용할 떄 몇몇 태스크에서는 시간이 오래 걸릴 수 있습니다. 이럴 땐 아래 예시 코드처럼  `dataset` 객체의 `shard` 메서드를 이용해 데이터 셋의 일부(예시에선 1/10)만을 선택하여 hyperparameter를 찾아보는 것도 한 방법이 될 수 있습니다. 찾은 hyperparameter를 전체 데이터셋에 대해 학습할 때 적용하여 최종 모델을 학습 시킵니다.
-# 
-# ```python
-# train_dataset = encoded_dataset["train"].shard(index=1, num_shards=10) 
-# ```
-# 
-
-# In[ ]:
-
-
-trainer = Trainer(
-    model_init=model_init,
-    args=args,
-    train_dataset=encoded_dataset["train"].shard(index=1, num_shards=10),
-    eval_dataset=encoded_dataset['validation'],
-    tokenizer=tokenizer,
-    compute_metrics=compute_metrics,
-)
-
-
-# In[ ]:
-
-
-import wandb
-
-
-# In[ ]:
-
-
-wandb.login()
-
-
-# In[ ]:
-
-
-id = wandb.util.generate_id()
-print(id)
-
-
-# - project : 실험기록을 관리할 프로젝트 이름. 없을 시 입력받은 이름으로 생성
-# - entity : weights & biases 사용자명 또는 팀 이름
-# - id : 실험에 부여된 고유 아이디
-# - name : 실험에 부여한 이름
-# - resume : 실험을 재개할 떄, 실험에 부여한 고유 아이디를 입력
-
-# In[ ]:
-
-
-wandb.init(project='[PROJECT_NAME]',
-           entity='[USER_NAME]',
-           id='[ID]'
-        #    name='[EXPERIMENT_NAME]'
-        #    resume=True,
-           )
-
-# wandb.init(project='klue-ynat-hps',
-#            entity='dukim',
-#            id='1stglc5n'
-#         #    name='ynat'
-#         #    resume=True,
-#            )
 
 
 # 이제 `hyperparameter_search` 메서드를 사용해 hyperparameter search를 수행할 수 있습니다. 이 메서드는 `BestRun` 객체를 반환화는데, 최대화된 objective 값(평가지표값, 본 task에서는 Macro F1)과 이때 선택된 hyperparameter를 포함합니다.
@@ -769,8 +690,14 @@ get_ipython().system('tar -czvf submission.tar.gz main.py model.actor.h5')
 # ```
 
 # # Reference
-# - [Text Classification on GLUE](https://colab.research.google.com/github/huggingface/notebooks/blob/master/examples/text_classification.ipynb#scrollTo=71pt6N0eIrJo)
+# - [Text Classification on GLUE](https://colab.research.google.com/github/huggingface/notebooks/blob/master/examples/text_classification.ipynb#scrollTo=71pt6N0eIrJo)을 KLUE의 주제 분류 데이터셋 YNAT에 맞게 수정 및 번역함.
 # 
 # - [HuggingFace Datasets Docs](https://huggingface.co/docs/datasets/index.html)
 # - [HuggingFace Transformers Docs](https://huggingface.co/transformers/index.html)
 # - [Using hyperparameter-search in Trainer](https://discuss.huggingface.co/t/using-hyperparameter-search-in-trainer/785/55)
+
+# In[ ]:
+
+
+
+
