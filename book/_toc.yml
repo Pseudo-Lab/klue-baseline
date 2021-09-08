@@ -11,5 +11,7 @@ chapters:
 - file: docs/Named entity recognition
 - file: docs/Relation extraction
 - file: docs/Dependency Parsing
+  sections:
+  - file: docs/DP-1
 - file: docs/Machine Reading Comprehension
 - file: docs/Dialogue State Tracking
