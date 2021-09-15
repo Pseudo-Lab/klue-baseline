@@ -32,16 +32,16 @@
 
 Task 별 주요 담당자는 다음과 같습니다.
 
-| Index |             Task              | Topic                                             | 담당자                                                       |
-| :---: | :---------------------------: | ------------------------------------------------- | ------------------------------------------------------------ |
-|  01   |  YNAT (Topic Classification)  | 'HuggingFace Hub 을 활용한 Fine tuning Baseline'  | [김대웅](https://github.com/KimDaeUng) [오윤선](https://github.com/Sunny-Michelle) |
-|  02   |  Semantic Textual Similarity  | 'HuggingFace Hub 을 활용한 Fine tuning Baseline'  | [김대웅](https://github.com/KimDaeUng)                       |
-|  03   |  Natural language inference   | 'Weight & Biase 을 활용한 Tokenizer 별 성능 비교' | [권지현](https://github.com/Jihyun22)                        |
-|  04   |   Named entity recognition    |                                                   | [전명준](https://github.com/oncores) [오윤선](https://github.com/Sunny-Michelle) |
-|  05   |      Relation extraction      |                                                   | [김보석](https://github.com/BOSOEK) [이승미](https://github.com/krorina1013) |
-|  06   |      Dependency Parsing       | 'pytorch Lightning 사용기'                        | [권지현](https://github.com/Jihyun22)                        |
-|  07   | Machine Reading Comprehension |                                                   | [송지현](https://github.com/sang0179) [김보석](https://github.com/BOSOEK) |
-|  08   | Dialogue State Tracking (Wos) |                                                   | [전명준](https://github.com/oncores) [송지현](https://github.com/sang0179) [이승미](https://github.com/krorina1013) |
+| Index |             Task              | Topic                                                        | 담당자                                                       |
+| :---: | :---------------------------: | ------------------------------------------------------------ | ------------------------------------------------------------ |
+|  01   |  YNAT (Topic Classification)  | HuggingFace Hub 을 활용한 Fine tuning Baseline (YNAT task ver) | [김대웅](https://github.com/KimDaeUng) [오윤선](https://github.com/Sunny-Michelle) |
+|  02   |  Semantic Textual Similarity  | HuggingFace Hub 을 활용한 Fine tuning Baseline (STS task ver) | [김대웅](https://github.com/KimDaeUng)                       |
+|  03   |  Natural language inference   | Weight & Biase 을 활용한 Tokenizer 별 성능 비교              | [권지현](https://github.com/Jihyun22)                        |
+|  04   |   Named entity recognition    | KoELECTRA 사용기                                             | [전명준](https://github.com/oncores) [오윤선](https://github.com/Sunny-Michelle) |
+|  05   |      Relation extraction      |                                                              | [김보석](https://github.com/BOSOEK) [이승미](https://github.com/krorina1013) |
+|  06   |      Dependency Parsing       | pytorch Lightning 사용기                                     | [권지현](https://github.com/Jihyun22)                        |
+|  07   | Machine Reading Comprehension | MRC Task 에 대한 이해                                        | [송지현](https://github.com/sang0179) [김보석](https://github.com/BOSOEK) |
+|  08   | Dialogue State Tracking (Wos) | Mos Task 에 대한 이해                                        | [전명준](https://github.com/oncores) [송지현](https://github.com/sang0179) |
 
 
 
