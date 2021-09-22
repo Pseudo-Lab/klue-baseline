@@ -24,7 +24,7 @@
 
 | 기수           | 크루명                     | 크루원                                                       | 활동 일자               |
 | -------------- | -------------------------- | ------------------------------------------------------------ | ----------------------- |
-| 가짜연구소 3기 | KLUE 로 모델 평가하기 크루 | [권지현](https://github.com/Jihyun22) [김대웅](https://github.com/KimDaeUng) [김보석](https://github.com/BOSOEK) [김정윤](https://github.com/skyepodium) [송지현](https://github.com/sang0179) [오윤선](https://github.com/Sunny-Michelle) [윤주성](https://github.com/eagle705) [이승미](https://github.com/krorina1013) [전명준](https://github.com/oncores) | 2021.07.21 ~ 2021.09.30 |
+| 가짜연구소 3기 | KLUE 로 모델 평가하기 크루 | [권지현](https://github.com/Jihyun22) [김대웅](https://github.com/KimDaeUng) [김보석](https://github.com/BOSOEK) [송지현](https://github.com/sang0179) [오윤선](https://github.com/Sunny-Michelle) [이승미](https://github.com/krorina1013) [전명준](https://github.com/oncores) | 2021.07.21 ~ 2021.09.30 |
 
 **KLUE로 모델 평가하기** 크루는 KLUE 벤치마크를 경험하는 것이 주 목표입니다.  8개의 과제에 대해 baseline  code 를 구성하고 KLUE 벤치마크로 평가해보려 합니다.
 
@@ -38,10 +38,10 @@ Task 별 주요 담당자는 다음과 같습니다.
 |  02   |  Semantic Textual Similarity  | HuggingFace Hub 을 활용한 Fine tuning Baseline (STS task ver) | [김대웅](https://github.com/KimDaeUng)                       |
 |  03   |  Natural language inference   | Weight & Biase 을 활용한 Tokenizer 별 성능 비교              | [권지현](https://github.com/Jihyun22)                        |
 |  04   |   Named entity recognition    | KoELECTRA 모델로 fine-tuning 하기                            | [전명준](https://github.com/oncores) [오윤선](https://github.com/Sunny-Michelle) |
-|  05   |      Relation extraction      |                                                              | [김보석](https://github.com/BOSOEK) [이승미](https://github.com/krorina1013) |
+|  05   |      Relation extraction      | RE task 기초 베이스라인 1, RE task 기초 베이스라인 2         | [김보석](https://github.com/BOSOEK) [이승미](https://github.com/krorina1013) |
 |  06   |      Dependency Parsing       | pytorch Lightning 적응기                                     | [권지현](https://github.com/Jihyun22)                        |
-|  07   | Machine Reading Comprehension | MRC Task 에 대한 이해                                        | [송지현](https://github.com/sang0179) [김보석](https://github.com/BOSOEK) |
-|  08   | Dialogue State Tracking (Wos) | Mos Task 에 대한 이해                                        | [전명준](https://github.com/oncores) [송지현](https://github.com/sang0179) |
+|  07   | Machine Reading Comprehension | MRC Task 에 대한 이해                                        | [송지현](https://github.com/sang0179)                        |
+|  08   | Dialogue State Tracking (Wos) | wos 데이터 살펴보기                                          | [전명준](https://github.com/oncores) [송지현](https://github.com/sang0179) |
 
 
 

@@ -1,0 +1,677 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>wos 데이터 살펴보기 &#8212; PseudoLab klue-baseline</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/PseudoLab_logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Dialogue State Tracking (Wos)" href="Dialogue%20State%20Tracking.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/PseudoLab_logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">PseudoLab klue-baseline</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index.html">
+   <!-- #region -->
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="Topic%20Classification.html">
+   YNAT(Topic Classification)
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="TC-1.html">
+     HuggingFace Hub 을 활용한 Fine tuning Baseline (YNAT ver.)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="Semantic%20Textual%20Similarity.html">
+   Semantic Textual Similarity
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="STS-1.html">
+     HuggingFace Hub 을 활용한 Fine tuning Baseline (STS ver.)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="Natural%20Language%20Inference.html">
+   Natural Language Inference
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NLI-1.html">
+     Weight &amp; Biase 을 활용한 Tokenizer 별 성능 비교
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="Named%20entity%20recognition.html">
+   Named entity recognition
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="NER-1.html">
+     KoELECTRA 모델로 fine-tuning 하기
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="Relation%20extraction.html">
+   Relation extraction
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="RE-1.html">
+     RE task 기초 베이스라인 1
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="Dependency%20Parsing.html">
+   Dependency Parsing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="DP-1.html">
+     Pytorch Lightning 적응기
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Machine%20Reading%20Comprehension.html">
+   Machine Reading Comprehension
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="Dialogue%20State%20Tracking.html">
+   Dialogue State Tracking (Wos)
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     wos 데이터 살펴보기
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/docs/DST-1.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Pseudo-Lab/klue-baseline"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/Pseudo-Lab/klue-baseline/issues/new?title=Issue%20on%20page%20%2Fdocs/DST-1.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Pseudo-Lab/klue-baseline/master?urlpath=tree/book/docs/DST-1.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   이 노트북이 담고 있는 내용
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#initialize">
+   Initialize
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vocab-file-load">
+   vocab file load
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataloader-make">
+   dataloader make
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#slot">
+     맞추어야 할 정답 slot
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#token-slot">
+     맞추어야 할 token slot
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="wos">
+<h1>wos 데이터 살펴보기<a class="headerlink" href="#wos" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Task : KLUE-Wos</p></li>
+<li><p>담당자: <a class="reference external" href="https://github.com/oncores">전명준</a> 님</p></li>
+<li><p>최종수정일: 21-09-22</p></li>
+<li><p>본 자료는 가짜연구소 3기 KLUE 로 모델 평가하기 크루 활동으로 작성됨</p></li>
+</ul>
+<div class="section" id="id1">
+<h2>이 노트북이 담고 있는 내용<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>klue 내 DST(Dialogue State Tracking) task를 이해하기 위함</p></li>
+<li><p>DST task에 사용되는 데이터셋은 wos dataset이며, klue에서 한글버전으로 만들어짐</p></li>
+<li><p>dst task를 구성하기 위해 어떻게 input data를 구성하는지 살펴봄</p></li>
+<li><p>klue-base line 기준</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span>
+<span class="kn">from</span> <span class="nn">klue_baseline</span> <span class="kn">import</span> <span class="n">KLUE_TASKS</span>
+<span class="kn">from</span> <span class="nn">klue_baseline.data</span> <span class="kn">import</span> <span class="n">DataProcessor</span><span class="p">,</span> <span class="n">KlueDataModule</span><span class="p">,</span> <span class="n">WoSProcessor</span>
+<span class="kn">from</span> <span class="nn">klue_baseline.models</span> <span class="kn">import</span> <span class="n">BaseTransformer</span><span class="p">,</span> <span class="n">Mode</span><span class="p">,</span> <span class="n">DPTransformer</span><span class="p">,</span> <span class="n">DSTTransformer</span>
+<span class="kn">from</span> <span class="nn">klue_baseline.utils</span> <span class="kn">import</span> <span class="n">Command</span>
+<span class="kn">from</span> <span class="nn">klue_baseline.metrics</span> <span class="kn">import</span> <span class="n">WoS_JGA</span><span class="p">,</span> <span class="n">WoS_SlotMicroF1</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="initialize">
+<h2>Initialize<a class="headerlink" href="#initialize" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">args</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">(</span>
+    <span class="n">accumulate_grad_batches</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+    <span class="n">adafactor</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+    <span class="n">adam_epsilon</span><span class="o">=</span><span class="mf">1e-08</span><span class="p">,</span> 
+    <span class="n">attention_dropout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+    <span class="n">cache_dir</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
+    <span class="n">command</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">,</span> 
+    <span class="n">config_name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
+    <span class="n">data_dir</span><span class="o">=</span><span class="s1">&#39;./wos&#39;</span><span class="p">,</span> 
+    <span class="n">decoder_layerdrop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+    <span class="n">dev_file_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+    <span class="n">dropout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+    <span class="n">early_stopping_mode</span><span class="o">=</span><span class="s1">&#39;max&#39;</span><span class="p">,</span> 
+    <span class="n">encoder_layerdrop</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+    <span class="n">eval_batch_size</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> 
+    <span class="n">fp16</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+    <span class="n">gpus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+    <span class="n">gradient_clip_val</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> 
+    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">3e-05</span><span class="p">,</span> 
+    <span class="n">lr_scheduler</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> 
+    <span class="n">max_epochs</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> 
+    <span class="n">max_seq_length</span><span class="o">=</span><span class="mi">510</span><span class="p">,</span> 
+    <span class="n">metric_key</span><span class="o">=</span><span class="s1">&#39;slot_micro_f1&#39;</span><span class="p">,</span> 
+    <span class="n">model_name_or_path</span><span class="o">=</span><span class="s1">&#39;./monologg/koelectra-base-v3-discriminator&#39;</span><span class="p">,</span> 
+    <span class="n">num_sanity_val_steps</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
+    <span class="n">num_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> 
+    <span class="n">ontology_path</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
+    <span class="n">output_dir</span><span class="o">=</span><span class="s1">&#39;./wos/wos_output&#39;</span><span class="p">,</span> 
+    <span class="n">parallel_decoding</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">patience</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span> 
+    <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> 
+    <span class="n">task</span><span class="o">=</span><span class="s1">&#39;wos&#39;</span><span class="p">,</span> 
+    <span class="n">teacher_forcing</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> 
+    <span class="n">test_file_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+    <span class="n">tokenizer_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+    <span class="n">tpu_cores</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+    <span class="n">train_batch_size</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> 
+    <span class="n">train_file_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+    <span class="n">truncate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">verbose_step_count</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
+    <span class="n">warmup_ratio</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> 
+    <span class="n">warmup_steps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+    <span class="n">weight_decay</span><span class="o">=</span><span class="mf">0.01</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="vocab-file-load">
+<h2>vocab file load<a class="headerlink" href="#vocab-file-load" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./vocab.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">text</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./wos/ontology.json&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
+    <span class="n">json_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;미리 ontology로 정의된 state&#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">json_data</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">],</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ontology 예시 : 관광-종류&#39;</span><span class="p">,</span> <span class="n">json_data</span><span class="p">[</span><span class="s1">&#39;관광-종류&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>미리 ontology로 정의된 state [&#39;관광-경치 좋은&#39;, &#39;관광-교육적&#39;, &#39;관광-도보 가능&#39;, &#39;관광-문화 예술&#39;, &#39;관광-역사적&#39;]
+
+ontology 예시 : 관광-종류 [&#39;none&#39;, &#39;dontcare&#39;, &#39;공원&#39;, &#39;박물관&#39;, &#39;공연&#39;, &#39;즐길거리&#39;, &#39;랜드마크&#39;, &#39;쇼핑&#39;, &#39;여행자 자료&#39;, &#39;기타&#39;, &#39;놀이공원&#39;, &#39;동물원&#39;, &#39;교통편&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="dataloader-make">
+<h2>dataloader make<a class="headerlink" href="#dataloader-make" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task</span> <span class="o">=</span> <span class="n">KlueTask</span><span class="p">(</span>
+        <span class="n">WoSProcessor</span><span class="p">,</span>
+        <span class="n">DSTTransformer</span><span class="p">,</span>
+        <span class="p">{</span><span class="s2">&quot;joint_goal_acc&quot;</span><span class="p">:</span> <span class="n">WoS_JGA</span><span class="p">,</span> <span class="s2">&quot;slot_micro_f1&quot;</span><span class="p">:</span> <span class="n">WoS_SlotMicroF1</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">task</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">command</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task</span><span class="o">.</span><span class="n">train_loader</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">guid</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;wos-v1_train_00000-0&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">&quot;guid&quot;: &quot;wos-v1_train_00000&quot;,</span>
+<span class="sd">&quot;domains&quot;: [</span>
+<span class="sd">    &quot;관광&quot;,</span>
+<span class="sd">    &quot;식당&quot;</span>
+<span class="sd">],</span>
+<span class="sd">&quot;dialogue&quot;: [</span>
+<span class="sd">    {</span>
+<span class="sd">        &quot;role&quot;: &quot;user&quot;,</span>
+<span class="sd">        &quot;text&quot;: &quot;서울 중앙에 있는 박물관을 찾아주세요&quot;,</span>
+<span class="sd">        &quot;state&quot;: [</span>
+<span class="sd">            &quot;관광-종류-박물관&quot;,</span>
+<span class="sd">            &quot;관광-지역-서울 중앙&quot;</span>
+<span class="sd">        ]</span>
+<span class="sd">    },</span>
+<span class="sd">    {</span>
+<span class="sd">        &quot;role&quot;: &quot;sys&quot;,</span>
+<span class="sd">        &quot;text&quot;: &quot;안녕하세요. 문화역서울 284은 어떠신가요? 평점도 4점으로 방문객들에게 좋은 평가를 받고 있습니다.&quot;</span>
+<span class="sd">    },</span>
+<span class="sd">    {</span>
+<span class="sd">        &quot;role&quot;: &quot;user&quot;,</span>
+<span class="sd">        &quot;text&quot;: &quot;좋네요 거기 평점은 말해주셨구 전화번호가 어떻게되나요?&quot;,</span>
+<span class="sd">        &quot;state&quot;: [</span>
+<span class="sd">            &quot;관광-종류-박물관&quot;,</span>
+<span class="sd">            &quot;관광-지역-서울 중앙&quot;,</span>
+<span class="sd">            &quot;관광-이름-문화역서울 284&quot;</span>
+<span class="sd">        ]</span>
+<span class="sd">    },</span>
+<span class="sd">    {</span>
+<span class="sd">        &quot;role&quot;: &quot;sys&quot;,</span>
+<span class="sd">        &quot;text&quot;: &quot;전화번호는 983880764입니다. 더 필요하신 게 있으실까요?&quot;</span>
+<span class="sd">    }</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;BERT input&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;input id&#39;</span><span class="p">,</span> <span class="n">task</span><span class="o">.</span><span class="n">train_loader</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">input_id</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;input to vocab&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">text</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">task</span><span class="o">.</span><span class="n">train_loader</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">input_id</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BERT input
+input id [2, 3, 3, 6265, 6672, 4073, 3249, 4034, 8732, 4292, 6722, 4076, 8553, 3]
+input to vocab [&#39;[CLS]&#39;, &#39;[SEP]&#39;, &#39;[SEP]&#39;, &#39;서울&#39;, &#39;중앙&#39;, &#39;##에&#39;, &#39;있&#39;, &#39;##는&#39;, &#39;박물관&#39;, &#39;##을&#39;, &#39;찾아&#39;, &#39;##주&#39;, &#39;##세요&#39;, &#39;[SEP]&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="slot">
+<h3>맞추어야 할 정답 slot<a class="headerlink" href="#slot" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;미리 ontology로 정의된 슬롯 45개 중 정답 slot 예측&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;gating ids&#39;</span><span class="p">,</span> <span class="n">task</span><span class="o">.</span><span class="n">train_loader</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">gating_id</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>미리 ontology로 정의된 슬롯 45개 중 정답 state가 있는 위치
+gating id [0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">target_ids_0</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">slot</span> <span class="ow">in</span> <span class="n">task</span><span class="o">.</span><span class="n">train_loader</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">target_ids</span><span class="p">:</span>
+    <span class="n">slot_token</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">slot</span> <span class="p">:</span>
+        <span class="n">slot_token</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="n">token</span><span class="p">])</span>
+    <span class="n">target_ids_0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">slot_token</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="token-slot">
+<h3>맞추어야 할 token slot<a class="headerlink" href="#token-slot" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;미리 ontology로 정의된 슬롯 45개 중 정답 token 예측&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;target ids&#39;</span><span class="p">,</span> <span class="n">task</span><span class="o">.</span><span class="n">train_loader</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">target_ids</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;target ids to vocab&#39;</span><span class="p">,</span> <span class="n">target_ids_0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>미리 ontology로 정의된 슬롯 45개 중 정답 token 예측
+target ids [[21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [8732, 3, 0], [21832, 11764, 3], [6265, 6672, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3], [21832, 11764, 3]]
+
+target ids to vocab [[&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;박물관&#39;, &#39;[SEP]&#39;, &#39;[PAD]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;서울&#39;, &#39;중앙&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;], [&#39;no&#39;, &#39;##ne&#39;, &#39;[SEP]&#39;]]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="Dialogue%20State%20Tracking.html" title="previous page">Dialogue State Tracking (Wos)</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By PseudoLab<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
