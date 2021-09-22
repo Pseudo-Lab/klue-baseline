@@ -11,6 +11,8 @@ chapters:
   sections:
   - file: docs/NLI-1
 - file: docs/Named entity recognition
+  sections:
+  - file: docs/NER-1
 - file: docs/Relation extraction
   sections:
   - file: docs/RE-1
@@ -19,3 +21,5 @@ chapters:
   - file: docs/DP-1
 - file: docs/Machine Reading Comprehension
 - file: docs/Dialogue State Tracking
+  sections:
+  - file: docs/DST-1
