@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RE task 기초 베이스라인 1 &#8212; PseudoLab klue-baseline</title>
+    <title>BERT로 RE task 다루기 &#8212; PseudoLab klue-baseline</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -138,7 +138,7 @@
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="NLI-1.html">
-     Weight &amp; Biase 을 활용한 Tokenizer 별 성능 비교
+     weight and biases 을 활용한 Tokenizer 별 성능 비교
     </a>
    </li>
   </ul>
@@ -172,7 +172,7 @@
   <ul class="current">
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     RE task 기초 베이스라인 1
+     BERT로 RE task 다루기
     </a>
    </li>
   </ul>
@@ -322,66 +322,121 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   RE task 기초 베이스라인 1
+   BERT로 RE task 다루기
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#init">
+   01 init
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     데이터 셋 가져오기
+    <a class="reference internal nav-link" href="#install">
+     필요 라이브러리 install
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     데이터 살짝 맛보기
+    <a class="reference internal nav-link" href="#import-device">
+     필요 라이브러리 import 및 device 설정
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id3">
-   토큰 추가
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#klue-bert-base">
-   klue/bert-base 토크나이저 가져오기
+  <a class="reference internal nav-link" href="#data-loading">
+   02 Data Loading¶
   </a>
   <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-download">
+     Data Download
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-view">
+     Data View
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-sample">
+     Data Sample
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#type-tokens">
+     Type Tokens를 추가하는 이유
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#entity-type-tokens">
+       즉 문장을 분류함에 있어서 제시된 entity들이 특별한 의미를 갖도록 하기 위해 type tokens들을 추가하는것!
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-processing">
+   03 Data Processing
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     토큰 추가
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tokenizer-load">
+     Tokenizer load
+    </a>
+   </li>
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#token">
      token 추가하기
     </a>
    </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-loader">
+   04 Data Loader
+  </a>
+  <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
+    <a class="reference internal nav-link" href="#id2">
      학습 데이터셋과 데이터로더 만들기
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id5">
-   klue/bert-base 모델을 로드하기
+  <a class="reference internal nav-link" href="#fine-tuning">
+   05 Fine-tuning
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#embedding-resize">
-     Embedding resize
+    <a class="reference internal nav-link" href="#model-load">
+     Model load¶
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#model-fine-tuning">
+       model fine-tuning
+      </a>
+     </li>
+    </ul>
    </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#test">
+   06 Test
+  </a>
+  <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#model-fine-tuning">
-     model fine-tuning
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id6">
-     결과 확인
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id7">
-     모델 평가하기
+    <a class="reference internal nav-link" href="#f1-score">
+     F1 score로 모델 평가하기
     </a>
    </li>
   </ul>
@@ -397,13 +452,39 @@
         
               <div>
                 
-  <div class="section" id="re-task-1">
-<h1>RE task 기초 베이스라인 1<a class="headerlink" href="#re-task-1" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="bert-re-task">
+<h1>BERT로 RE task 다루기<a class="headerlink" href="#bert-re-task" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p>Task : KLUE-RE</p></li>
 <li><p>담당자: <a class="reference external" href="https://github.com/BOSOEK">김보석</a> 님</p></li>
 <li><p>최종수정일: 21-09-15</p></li>
 <li><p>본 자료는 가짜연구소 3기 KLUE 로 모델 평가하기 크루 활동으로 작성됨</p></li>
+</ul>
+</div>
+<div class="section" id="init">
+<h1>01 init<a class="headerlink" href="#init" title="Permalink to this headline">¶</a></h1>
+<p>본 노트북은 hugging face의 pretrained-bert로 관계추출하는 방법을 설명합니다.<br />
+Simple BERT Models for Relation Extraction 논문을 참고하였습니다.(<a class="reference external" href="https://arxiv.org/pdf/1904.05255.pdf">참고 Relation Extraction 논문</a>)</p>
+<ul>
+<li><p>관계추출 task란?<br />
+입력으로 주어진 문장 내에서 2개의 entity에 대한 관계를 총 30가지의 관계 중 하나로 분류하는 것입니다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">입력</span> 
+<span class="o">-</span> <span class="n">문장</span> <span class="p">:</span> <span class="n">이날</span> <span class="n">보고회에는</span> <span class="n">권오봉</span> <span class="n">여수시장과</span> <span class="n">전문가</span> <span class="n">자문위원</span><span class="p">,</span> <span class="n">전남도와</span> <span class="n">여수시</span> <span class="n">관계공무원</span> <span class="n">등</span> <span class="mi">20</span><span class="n">여</span> <span class="n">명이</span> <span class="n">참석했다</span><span class="o">.</span>
+<span class="o">-</span> <span class="n">subject</span> <span class="n">entity</span> <span class="p">:</span> <span class="n">여수시</span>
+<span class="o">-</span> <span class="nb">object</span> <span class="n">entity</span> <span class="p">:</span> <span class="n">권오봉</span>
+
+<span class="n">출력</span> 
+<span class="o">-</span> <span class="n">lable</span> <span class="p">:</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="section" id="install">
+<h2>필요 라이브러리 install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>datasets : hugging face 의 datasets 라이브러리(관련 페이지 링크) 중 load_dataset 매서드를 사용하면 쉽게 데이터를 다운로드 받을 수 있습니다.</p></li>
+<li><p>sklearn : 학습 모델 평가시 사용합니다.</p></li>
+<li><p>transformers : hugging face(관련 페이지 링크) 에서 BERT 모델 등을 불러오기 위해 사용합니다.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -414,61 +495,100 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: datasets in /usr/local/lib/python3.7/dist-packages (1.11.0)
-Requirement already satisfied: packaging in /usr/local/lib/python3.7/dist-packages (from datasets) (21.0)
-Requirement already satisfied: xxhash in /usr/local/lib/python3.7/dist-packages (from datasets) (2.0.2)
-Requirement already satisfied: huggingface-hub&lt;0.1.0 in /usr/local/lib/python3.7/dist-packages (from datasets) (0.0.16)
-Requirement already satisfied: pandas in /usr/local/lib/python3.7/dist-packages (from datasets) (1.1.5)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting datasets
+  Downloading datasets-1.12.1-py3-none-any.whl (270 kB)
+     |████████████████████████████████| 270 kB 5.6 MB/s 
+?25hCollecting xxhash
+  Downloading xxhash-2.0.2-cp37-cp37m-manylinux2010_x86_64.whl (243 kB)
+     |████████████████████████████████| 243 kB 33.6 MB/s 
+?25hRequirement already satisfied: pyarrow!=4.0.0,&gt;=1.0.0 in /usr/local/lib/python3.7/dist-packages (from datasets) (3.0.0)
+Collecting huggingface-hub&lt;0.1.0,&gt;=0.0.14
+  Downloading huggingface_hub-0.0.17-py3-none-any.whl (52 kB)
+     |████████████████████████████████| 52 kB 1.6 MB/s 
+?25hRequirement already satisfied: multiprocess in /usr/local/lib/python3.7/dist-packages (from datasets) (0.70.12.2)
+Requirement already satisfied: importlib-metadata in /usr/local/lib/python3.7/dist-packages (from datasets) (4.8.1)
+Collecting fsspec[http]&gt;=2021.05.0
+  Downloading fsspec-2021.9.0-py3-none-any.whl (123 kB)
+     |████████████████████████████████| 123 kB 52.8 MB/s 
+?25hRequirement already satisfied: packaging in /usr/local/lib/python3.7/dist-packages (from datasets) (21.0)
+Collecting aiohttp
+  Downloading aiohttp-3.7.4.post0-cp37-cp37m-manylinux2014_x86_64.whl (1.3 MB)
+     |████████████████████████████████| 1.3 MB 44.2 MB/s 
+?25hRequirement already satisfied: pandas in /usr/local/lib/python3.7/dist-packages (from datasets) (1.1.5)
+Requirement already satisfied: numpy&gt;=1.17 in /usr/local/lib/python3.7/dist-packages (from datasets) (1.19.5)
 Requirement already satisfied: requests&gt;=2.19.0 in /usr/local/lib/python3.7/dist-packages (from datasets) (2.23.0)
 Requirement already satisfied: dill in /usr/local/lib/python3.7/dist-packages (from datasets) (0.3.4)
-Requirement already satisfied: pyarrow!=4.0.0,&gt;=1.0.0 in /usr/local/lib/python3.7/dist-packages (from datasets) (3.0.0)
-Requirement already satisfied: multiprocess in /usr/local/lib/python3.7/dist-packages (from datasets) (0.70.12.2)
-Requirement already satisfied: fsspec&gt;=2021.05.0 in /usr/local/lib/python3.7/dist-packages (from datasets) (2021.8.1)
-Requirement already satisfied: numpy&gt;=1.17 in /usr/local/lib/python3.7/dist-packages (from datasets) (1.19.5)
-Requirement already satisfied: tqdm&gt;=4.42 in /usr/local/lib/python3.7/dist-packages (from datasets) (4.62.0)
-Requirement already satisfied: importlib-metadata in /usr/local/lib/python3.7/dist-packages (from datasets) (4.6.4)
-Requirement already satisfied: typing-extensions in /usr/local/lib/python3.7/dist-packages (from huggingface-hub&lt;0.1.0-&gt;datasets) (3.7.4.3)
-Requirement already satisfied: filelock in /usr/local/lib/python3.7/dist-packages (from huggingface-hub&lt;0.1.0-&gt;datasets) (3.0.12)
+Requirement already satisfied: tqdm&gt;=4.62.1 in /usr/local/lib/python3.7/dist-packages (from datasets) (4.62.2)
+Requirement already satisfied: typing-extensions in /usr/local/lib/python3.7/dist-packages (from huggingface-hub&lt;0.1.0,&gt;=0.0.14-&gt;datasets) (3.7.4.3)
+Requirement already satisfied: filelock in /usr/local/lib/python3.7/dist-packages (from huggingface-hub&lt;0.1.0,&gt;=0.0.14-&gt;datasets) (3.0.12)
 Requirement already satisfied: pyparsing&gt;=2.0.2 in /usr/local/lib/python3.7/dist-packages (from packaging-&gt;datasets) (2.4.7)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.7/dist-packages (from requests&gt;=2.19.0-&gt;datasets) (2021.5.30)
-Requirement already satisfied: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/local/lib/python3.7/dist-packages (from requests&gt;=2.19.0-&gt;datasets) (1.24.3)
 Requirement already satisfied: chardet&lt;4,&gt;=3.0.2 in /usr/local/lib/python3.7/dist-packages (from requests&gt;=2.19.0-&gt;datasets) (3.0.4)
 Requirement already satisfied: idna&lt;3,&gt;=2.5 in /usr/local/lib/python3.7/dist-packages (from requests&gt;=2.19.0-&gt;datasets) (2.10)
-Requirement already satisfied: zipp&gt;=0.5 in /usr/local/lib/python3.7/dist-packages (from importlib-metadata-&gt;datasets) (3.5.0)
-Requirement already satisfied: python-dateutil&gt;=2.7.3 in /usr/local/lib/python3.7/dist-packages (from pandas-&gt;datasets) (2.8.2)
+Requirement already satisfied: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/local/lib/python3.7/dist-packages (from requests&gt;=2.19.0-&gt;datasets) (1.24.3)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.7/dist-packages (from requests&gt;=2.19.0-&gt;datasets) (2021.5.30)
+Collecting multidict&lt;7.0,&gt;=4.5
+  Downloading multidict-5.1.0-cp37-cp37m-manylinux2014_x86_64.whl (142 kB)
+     |████████████████████████████████| 142 kB 49.3 MB/s 
+?25hRequirement already satisfied: attrs&gt;=17.3.0 in /usr/local/lib/python3.7/dist-packages (from aiohttp-&gt;datasets) (21.2.0)
+Collecting async-timeout&lt;4.0,&gt;=3.0
+  Downloading async_timeout-3.0.1-py3-none-any.whl (8.2 kB)
+Collecting yarl&lt;2.0,&gt;=1.0
+  Downloading yarl-1.6.3-cp37-cp37m-manylinux2014_x86_64.whl (294 kB)
+     |████████████████████████████████| 294 kB 54.0 MB/s 
+?25hRequirement already satisfied: zipp&gt;=0.5 in /usr/local/lib/python3.7/dist-packages (from importlib-metadata-&gt;datasets) (3.5.0)
 Requirement already satisfied: pytz&gt;=2017.2 in /usr/local/lib/python3.7/dist-packages (from pandas-&gt;datasets) (2018.9)
+Requirement already satisfied: python-dateutil&gt;=2.7.3 in /usr/local/lib/python3.7/dist-packages (from pandas-&gt;datasets) (2.8.2)
 Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.7/dist-packages (from python-dateutil&gt;=2.7.3-&gt;pandas-&gt;datasets) (1.15.0)
+Installing collected packages: multidict, yarl, async-timeout, fsspec, aiohttp, xxhash, huggingface-hub, datasets
+Successfully installed aiohttp-3.7.4.post0 async-timeout-3.0.1 datasets-1.12.1 fsspec-2021.9.0 huggingface-hub-0.0.17 multidict-5.1.0 xxhash-2.0.2 yarl-1.6.3
 Requirement already satisfied: sklearn in /usr/local/lib/python3.7/dist-packages (0.0)
 Requirement already satisfied: scikit-learn in /usr/local/lib/python3.7/dist-packages (from sklearn) (0.22.2.post1)
 Requirement already satisfied: joblib&gt;=0.11 in /usr/local/lib/python3.7/dist-packages (from scikit-learn-&gt;sklearn) (1.0.1)
 Requirement already satisfied: numpy&gt;=1.11.0 in /usr/local/lib/python3.7/dist-packages (from scikit-learn-&gt;sklearn) (1.19.5)
 Requirement already satisfied: scipy&gt;=0.17.0 in /usr/local/lib/python3.7/dist-packages (from scikit-learn-&gt;sklearn) (1.4.1)
-Requirement already satisfied: transformers in /usr/local/lib/python3.7/dist-packages (4.10.2)
-Requirement already satisfied: sacremoses in /usr/local/lib/python3.7/dist-packages (from transformers) (0.0.45)
-Requirement already satisfied: importlib-metadata in /usr/local/lib/python3.7/dist-packages (from transformers) (4.6.4)
-Requirement already satisfied: pyyaml&gt;=5.1 in /usr/local/lib/python3.7/dist-packages (from transformers) (5.4.1)
-Requirement already satisfied: packaging in /usr/local/lib/python3.7/dist-packages (from transformers) (21.0)
-Requirement already satisfied: tokenizers&lt;0.11,&gt;=0.10.1 in /usr/local/lib/python3.7/dist-packages (from transformers) (0.10.3)
-Requirement already satisfied: huggingface-hub&gt;=0.0.12 in /usr/local/lib/python3.7/dist-packages (from transformers) (0.0.16)
+Collecting transformers
+  Downloading transformers-4.11.0-py3-none-any.whl (2.9 MB)
+     |████████████████████████████████| 2.9 MB 5.2 MB/s 
+?25hRequirement already satisfied: tqdm&gt;=4.27 in /usr/local/lib/python3.7/dist-packages (from transformers) (4.62.2)
+Requirement already satisfied: packaging&gt;=20.0 in /usr/local/lib/python3.7/dist-packages (from transformers) (21.0)
 Requirement already satisfied: regex!=2019.12.17 in /usr/local/lib/python3.7/dist-packages (from transformers) (2019.12.20)
-Requirement already satisfied: tqdm&gt;=4.27 in /usr/local/lib/python3.7/dist-packages (from transformers) (4.62.0)
-Requirement already satisfied: numpy&gt;=1.17 in /usr/local/lib/python3.7/dist-packages (from transformers) (1.19.5)
-Requirement already satisfied: filelock in /usr/local/lib/python3.7/dist-packages (from transformers) (3.0.12)
 Requirement already satisfied: requests in /usr/local/lib/python3.7/dist-packages (from transformers) (2.23.0)
-Requirement already satisfied: typing-extensions in /usr/local/lib/python3.7/dist-packages (from huggingface-hub&gt;=0.0.12-&gt;transformers) (3.7.4.3)
-Requirement already satisfied: pyparsing&gt;=2.0.2 in /usr/local/lib/python3.7/dist-packages (from packaging-&gt;transformers) (2.4.7)
+Collecting pyyaml&gt;=5.1
+  Downloading PyYAML-5.4.1-cp37-cp37m-manylinux1_x86_64.whl (636 kB)
+     |████████████████████████████████| 636 kB 45.4 MB/s 
+?25hRequirement already satisfied: filelock in /usr/local/lib/python3.7/dist-packages (from transformers) (3.0.12)
+Collecting sacremoses
+  Downloading sacremoses-0.0.46-py3-none-any.whl (895 kB)
+     |████████████████████████████████| 895 kB 50.8 MB/s 
+?25hRequirement already satisfied: huggingface-hub&gt;=0.0.17 in /usr/local/lib/python3.7/dist-packages (from transformers) (0.0.17)
+Requirement already satisfied: numpy&gt;=1.17 in /usr/local/lib/python3.7/dist-packages (from transformers) (1.19.5)
+Collecting tokenizers&lt;0.11,&gt;=0.10.1
+  Downloading tokenizers-0.10.3-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (3.3 MB)
+     |████████████████████████████████| 3.3 MB 38.1 MB/s 
+?25hRequirement already satisfied: importlib-metadata in /usr/local/lib/python3.7/dist-packages (from transformers) (4.8.1)
+Requirement already satisfied: typing-extensions in /usr/local/lib/python3.7/dist-packages (from huggingface-hub&gt;=0.0.17-&gt;transformers) (3.7.4.3)
+Requirement already satisfied: pyparsing&gt;=2.0.2 in /usr/local/lib/python3.7/dist-packages (from packaging&gt;=20.0-&gt;transformers) (2.4.7)
 Requirement already satisfied: zipp&gt;=0.5 in /usr/local/lib/python3.7/dist-packages (from importlib-metadata-&gt;transformers) (3.5.0)
-Requirement already satisfied: idna&lt;3,&gt;=2.5 in /usr/local/lib/python3.7/dist-packages (from requests-&gt;transformers) (2.10)
-Requirement already satisfied: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/local/lib/python3.7/dist-packages (from requests-&gt;transformers) (1.24.3)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.7/dist-packages (from requests-&gt;transformers) (2021.5.30)
 Requirement already satisfied: chardet&lt;4,&gt;=3.0.2 in /usr/local/lib/python3.7/dist-packages (from requests-&gt;transformers) (3.0.4)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.7/dist-packages (from requests-&gt;transformers) (2021.5.30)
+Requirement already satisfied: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/local/lib/python3.7/dist-packages (from requests-&gt;transformers) (1.24.3)
+Requirement already satisfied: idna&lt;3,&gt;=2.5 in /usr/local/lib/python3.7/dist-packages (from requests-&gt;transformers) (2.10)
+Requirement already satisfied: click in /usr/local/lib/python3.7/dist-packages (from sacremoses-&gt;transformers) (7.1.2)
 Requirement already satisfied: six in /usr/local/lib/python3.7/dist-packages (from sacremoses-&gt;transformers) (1.15.0)
 Requirement already satisfied: joblib in /usr/local/lib/python3.7/dist-packages (from sacremoses-&gt;transformers) (1.0.1)
-Requirement already satisfied: click in /usr/local/lib/python3.7/dist-packages (from sacremoses-&gt;transformers) (7.1.2)
+Installing collected packages: tokenizers, sacremoses, pyyaml, transformers
+  Attempting uninstall: pyyaml
+    Found existing installation: PyYAML 3.13
+    Uninstalling PyYAML-3.13:
+      Successfully uninstalled PyYAML-3.13
+Successfully installed pyyaml-5.4.1 sacremoses-0.0.46 tokenizers-0.10.3 transformers-4.11.0
 </pre></div>
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="import-device">
+<h2>필요 라이브러리 import 및 device 설정<a class="headerlink" href="#import-device" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
@@ -480,12 +600,23 @@ Requirement already satisfied: click in /usr/local/lib/python3.7/dist-packages (
 <span class="kn">from</span> <span class="nn">datasets.arrow_dataset</span> <span class="kn">import</span> <span class="n">Dataset</span>
 <span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">AutoModelForSequenceClassification</span><span class="p">,</span> <span class="n">AdamW</span>
 <span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="id1">
-<h2>데이터 셋 가져오기<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+<div class="section" id="data-loading">
+<h1>02 Data Loading¶<a class="headerlink" href="#data-loading" title="Permalink to this headline">¶</a></h1>
+<p>huggingface의 datasets 라이브러리의 load_dataset으로 데이터를 다운받습니다.</p>
+<div class="section" id="data-download">
+<h2>Data Download<a class="headerlink" href="#data-download" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>train 데이터셋 : 32470개</p></li>
+<li><p>validation 데이터셋 : 7765개</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;klue&#39;</span><span class="p">,</span> <span class="s1">&#39;re&#39;</span><span class="p">)</span>
@@ -494,10 +625,25 @@ Requirement already satisfied: click in /usr/local/lib/python3.7/dist-packages (
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reusing dataset klue (/root/.cache/huggingface/datasets/klue/re/1.0.0/55ff8f92b7a4b9842be6514ce0b4b5295b46d5e493f8bb5760da4be717018f90)
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "2af2f7e67cd1446fb5535e2c2302b00d", "version_major": 2, "version_minor": 0}
+</script><script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "ea265a72bf614847b30f6ddfc2302bf0", "version_major": 2, "version_minor": 0}
+</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading and preparing dataset klue/re (download: 5.41 MiB, generated: 13.07 MiB, post-processed: Unknown size, total: 18.48 MiB) to /root/.cache/huggingface/datasets/klue/re/1.0.0/55ff8f92b7a4b9842be6514ce0b4b5295b46d5e493f8bb5760da4be717018f90...
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DatasetDict({
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "60f92137a4564a08a7965dd3fcc8d4bf", "version_major": 2, "version_minor": 0}
+</script><script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "d8a6254f99dc46ffaa9aeef96d22615f", "version_major": 2, "version_minor": 0}
+</script><script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "068d3f2c751c413993449ac2cb20a83a", "version_major": 2, "version_minor": 0}
+</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dataset klue downloaded and prepared to /root/.cache/huggingface/datasets/klue/re/1.0.0/55ff8f92b7a4b9842be6514ce0b4b5295b46d5e493f8bb5760da4be717018f90. Subsequent calls will reuse this data.
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "bfb72e8d839943f0aa9cd9e23683b103", "version_major": 2, "version_minor": 0}
+</script><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DatasetDict({
     train: Dataset({
         features: [&#39;guid&#39;, &#39;sentence&#39;, &#39;subject_entity&#39;, &#39;object_entity&#39;, &#39;label&#39;, &#39;source&#39;],
         num_rows: 32470
@@ -512,9 +658,9 @@ Requirement already satisfied: click in /usr/local/lib/python3.7/dist-packages (
 </div>
 </div>
 </div>
-<div class="section" id="id2">
-<h2>데이터 살짝 맛보기<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<p>input은 sentence, output은 label</p>
+<div class="section" id="data-view">
+<h2>Data View<a class="headerlink" href="#data-view" title="Permalink to this headline">¶</a></h2>
+<p>dataset의 구조를 데이터 샘플을 통해 살펴보겠습니다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 데이터 구성</span>
@@ -539,23 +685,77 @@ Requirement already satisfied: click in /usr/local/lib/python3.7/dist-packages (
 </div>
 </div>
 </div>
+<p>관계 추출(Relation Extraction)의 구조는 다음과 같습니다.</p>
+<ol class="simple">
+<li><p>guid : 고유 index</p></li>
+<li><p>label : 관계 라벨(0 ~ 29)</p></li>
+<li><p>object_entity : 개체 엔티티 정보(시작 글자 위치, 끝나는 글자 위치, 단어, 단어 타입(ORG, PER 등)</p></li>
+<li><p>subject_entity : 주체 엔티티 정보(시작 글자 위치, 끝나는 글자 위치, 단어, 단어 타입(ORG, PER 등)</p></li>
+<li><p>sentence : 제시 문장</p></li>
+</ol>
 </div>
-</div>
-<div class="section" id="id3">
-<h1>토큰 추가<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h1>
-<p>__sentence__에 관계 단어 두개를 표시하기 위해 특별 토큰을 추가합니다.</p>
+<div class="section" id="data-sample">
+<h2>Data Sample<a class="headerlink" href="#data-sample" title="Permalink to this headline">¶</a></h2>
+<p>각 column 구성을 임의의 3개의 샘플을 추출하여 살펴보겠습니다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;subject_entity&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">32470</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span> <span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;번째 Data&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;guid : &#39;</span> <span class="o">+</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;guid&#39;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;label : &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;label&#39;</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;object_entity : &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;object_entity&#39;</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;subject_entity&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;subject_entity&#39;</span><span class="p">]))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;sentence : &#39;</span> <span class="o">+</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;sentence&#39;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=============================================&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;end_idx&#39;: 26, &#39;start_idx&#39;: 24, &#39;type&#39;: &#39;ORG&#39;, &#39;word&#39;: &#39;비틀즈&#39;}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17273번째 Data
+guid : klue-re-v1_train_17273
+label : 5
+object_entity : {&#39;word&#39;: &#39;네덜란드&#39;, &#39;start_idx&#39;: 45, &#39;end_idx&#39;: 48, &#39;type&#39;: &#39;ORG&#39;}
+subject_entity{&#39;word&#39;: &#39;퀴라소&#39;, &#39;start_idx&#39;: 16, &#39;end_idx&#39;: 18, &#39;type&#39;: &#39;ORG&#39;}
+sentence : 2007년부터 2013년까지 퀴라소 U-20 대표팀, 네덜란드 U-19 대표팀, 네덜란드 U-21 대표팀에서 25경기 1골을 기록했고 이후 2016년 퀴라소 A대표팀에 처음으로 발탁되어 같은 해 3월 바베이도스와의 친선 경기에서 국제 A매치 첫 경기를 치뤘으며 현재까지 A매치 28경기에서 11골을 뽑아내면서 퀴라소의 2017년 카리브컵 우승, 2019년 킹스컵 우승, 2019년 CONCACAF 골드컵 8강 진출에 공헌했다.
+=============================================
+
+12499번째 Data
+guid : klue-re-v1_train_12499
+label : 18
+object_entity : {&#39;word&#39;: &#39;베르놀라크 육군&#39;, &#39;start_idx&#39;: 0, &#39;end_idx&#39;: 7, &#39;type&#39;: &#39;PER&#39;}
+subject_entity{&#39;word&#39;: &#39;페르디난트 차틀로시&#39;, &#39;start_idx&#39;: 24, &#39;end_idx&#39;: 33, &#39;type&#39;: &#39;PER&#39;}
+sentence : 베르놀라크 육군은 슬로바키아 국방부 장관인 페르디난트 차틀로시가 지휘했으며, 초기 지휘부는 스피슈스카노바베스였으나 9월 8일 이후 프레쇼우 근처로 옮겼다.
+=============================================
+
+27819번째 Data
+guid : klue-re-v1_train_27819
+label : 10
+object_entity : {&#39;word&#39;: &#39;김영삼&#39;, &#39;start_idx&#39;: 15, &#39;end_idx&#39;: 17, &#39;type&#39;: &#39;PER&#39;}
+subject_entity{&#39;word&#39;: &#39;문민정부&#39;, &#39;start_idx&#39;: 3, &#39;end_idx&#39;: 6, &#39;type&#39;: &#39;ORG&#39;}
+sentence : 이는 문민정부가 들어섰다는 김영삼 정권 때 632명보다 두 배에 가까운 수치이다.
+=============================================
 </pre></div>
 </div>
 </div>
 </div>
+<p>RE task 의 목적은 주어진 문장 내의 두 entity가 어떤 토픽(Topic)에 속하는지 분류하는 것입니다.</p>
+<p>이때 input 에는 entity type이 표시된 토큰으로 각 entity들을 감싼 문장이 주어지며 label이 target으로 사용된니다</p>
+<img src='https://user-images.githubusercontent.com/68007145/134886362-28445262-e16a-4cc2-bde0-b5b2d3f54bd0.PNG'></div>
+<div class="section" id="type-tokens">
+<h2>Type Tokens를 추가하는 이유<a class="headerlink" href="#type-tokens" title="Permalink to this headline">¶</a></h2>
+<p>추가한 token은 transformer 전체층을 다 거치고 나면 sequence의 결합된 의미를 가지게 되는데, 여기에 간단한 classifier를 붙이면 단일 문장의 classification을 쉽게 할 수 있게 됩니다.</p>
+<div class="section" id="entity-type-tokens">
+<h3>즉 문장을 분류함에 있어서 제시된 entity들이 특별한 의미를 갖도록 하기 위해 type tokens들을 추가하는것!<a class="headerlink" href="#entity-type-tokens" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+<div class="section" id="data-processing">
+<h1>03 Data Processing<a class="headerlink" href="#data-processing" title="Permalink to this headline">¶</a></h1>
+<p>KLUE-RE task 중 토큰 추가와 Tokenizer를 사용하여 데이터를 인코딩한 후 전처리하는 과정을 설명합니다.</p>
+<div class="section" id="id1">
+<h2>토큰 추가<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>sentence 에 관계 단어 두개를 표시하기 위한 각각의 엔티티 타입을 특별 토큰형태로 추가합니다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_Token</span><span class="p">(</span><span class="n">dataset</span><span class="p">):</span>
@@ -569,11 +769,13 @@ Requirement already satisfied: click in /usr/local/lib/python3.7/dist-packages (
         <span class="n">object_end</span> <span class="o">=</span>  <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;object_entity&#39;</span><span class="p">][</span><span class="s1">&#39;end_idx&#39;</span><span class="p">])</span>
         <span class="n">subject_start</span> <span class="o">=</span>  <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;subject_entity&#39;</span><span class="p">][</span><span class="s1">&#39;start_idx&#39;</span><span class="p">])</span>
         <span class="n">subject_end</span> <span class="o">=</span>  <span class="nb">int</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;subject_entity&#39;</span><span class="p">][</span><span class="s1">&#39;end_idx&#39;</span><span class="p">])</span>
+        <span class="n">otype</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;object_entity&#39;</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
+        <span class="n">stype</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;subject_entity&#39;</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="n">object_start</span> <span class="o">&lt;</span> <span class="n">subject_start</span><span class="p">:</span>
-            <span class="n">new_sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="p">[:</span><span class="n">object_start</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&lt;o&gt;&#39;</span> <span class="o">+</span> <span class="n">sentence</span><span class="p">[</span><span class="n">object_start</span><span class="p">:</span><span class="n">object_end</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&lt;/o&gt;&#39;</span> <span class="o">+</span> <span class="n">sentence</span><span class="p">[</span><span class="n">object_end</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">subject_start</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&lt;s&gt;&#39;</span> <span class="o">+</span> <span class="n">sentence</span><span class="p">[</span><span class="n">subject_start</span><span class="p">:</span><span class="n">subject_end</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&lt;/s&gt;&#39;</span> <span class="o">+</span> <span class="n">sentence</span><span class="p">[</span><span class="n">subject_end</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="n">new_sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="p">[:</span><span class="n">object_start</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&lt;O-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">otype</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;&gt;&#39;</span> <span class="o">+</span> <span class="n">sentence</span><span class="p">[</span><span class="n">object_start</span><span class="p">:</span><span class="n">object_end</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&lt;/O-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">otype</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;&gt;&#39;</span> <span class="o">+</span> <span class="n">sentence</span><span class="p">[</span><span class="n">object_end</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">subject_start</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&lt;S-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">stype</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;&gt;&#39;</span> <span class="o">+</span> <span class="n">sentence</span><span class="p">[</span><span class="n">subject_start</span><span class="p">:</span><span class="n">subject_end</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&lt;/S-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">stype</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;&gt;&#39;</span> <span class="o">+</span> <span class="n">sentence</span><span class="p">[</span><span class="n">subject_end</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">new_sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="p">[:</span><span class="n">subject_start</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&lt;s&gt;&#39;</span> <span class="o">+</span> <span class="n">sentence</span><span class="p">[</span><span class="n">subject_start</span><span class="p">:</span><span class="n">subject_end</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&lt;/s&gt;&#39;</span> <span class="o">+</span> <span class="n">sentence</span><span class="p">[</span><span class="n">subject_end</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">object_start</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&lt;o&gt;&#39;</span> <span class="o">+</span> <span class="n">sentence</span><span class="p">[</span><span class="n">object_start</span><span class="p">:</span><span class="n">object_end</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&lt;/o&gt;&#39;</span> <span class="o">+</span> <span class="n">sentence</span><span class="p">[</span><span class="n">object_end</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="n">new_sentence</span> <span class="o">=</span> <span class="n">sentence</span><span class="p">[:</span><span class="n">subject_start</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&lt;S-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">stype</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;&gt;&#39;</span> <span class="o">+</span> <span class="n">sentence</span><span class="p">[</span><span class="n">subject_start</span><span class="p">:</span><span class="n">subject_end</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&lt;/S-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">stype</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;&gt;&#39;</span> <span class="o">+</span> <span class="n">sentence</span><span class="p">[</span><span class="n">subject_end</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">object_start</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&lt;O-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">otype</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;&gt;&#39;</span> <span class="o">+</span> <span class="n">sentence</span><span class="p">[</span><span class="n">object_start</span><span class="p">:</span><span class="n">object_end</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&lt;/O-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">otype</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;&gt;&#39;</span> <span class="o">+</span> <span class="n">sentence</span><span class="p">[</span><span class="n">object_end</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
 
         <span class="c1"># 본문 저장</span>
         <span class="n">sentences</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_sentence</span><span class="p">)</span>
@@ -604,54 +806,165 @@ Requirement already satisfied: click in /usr/local/lib/python3.7/dist-packages (
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>〈Something〉는 &lt;o&gt;조지 해리슨&lt;/o&gt;이 쓰고 &lt;s&gt;비틀즈&lt;/s&gt;가 1969년 앨범 《Abbey Road》에 담은 노래다. 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>〈Something〉는 &lt;O-PER&gt;조지 해리슨&lt;/O-PER&gt;이 쓰고 &lt;S-ORG&gt;비틀즈&lt;/S-ORG&gt;가 1969년 앨범 《Abbey Road》에 담은 노래다. 
 
-호남이 기반인 바른미래당·&lt;o&gt;대안신당&lt;/o&gt;·&lt;s&gt;민주평화당&lt;/s&gt;이 우여곡절 끝에 합당해 민생당(가칭)으로 재탄생한다. 
+호남이 기반인 바른미래당·&lt;O-ORG&gt;대안신당&lt;/O-ORG&gt;·&lt;S-ORG&gt;민주평화당&lt;/S-ORG&gt;이 우여곡절 끝에 합당해 민생당(가칭)으로 재탄생한다. 
 
-K리그2에서 성적 1위를 달리고 있는 &lt;s&gt;광주FC&lt;/s&gt;는 지난 26일 &lt;o&gt;한국프로축구연맹&lt;/o&gt;으로부터 관중 유치 성과와 마케팅 성과를 인정받아 ‘풀 스타디움상’과 ‘플러스 스타디움상’을 수상했다. 
+K리그2에서 성적 1위를 달리고 있는 &lt;S-ORG&gt;광주FC&lt;/S-ORG&gt;는 지난 26일 &lt;O-ORG&gt;한국프로축구연맹&lt;/O-ORG&gt;으로부터 관중 유치 성과와 마케팅 성과를 인정받아 ‘풀 스타디움상’과 ‘플러스 스타디움상’을 수상했다. 
 
-균일가 생활용품점 (주)&lt;s&gt;아성다이소&lt;/s&gt;(대표 &lt;o&gt;박정부&lt;/o&gt;)는 코로나19 바이러스로 어려움을 겪고 있는 대구광역시에 행복박스를 전달했다고 10일 밝혔다. 
+균일가 생활용품점 (주)&lt;S-ORG&gt;아성다이소&lt;/S-ORG&gt;(대표 &lt;O-PER&gt;박정부&lt;/O-PER&gt;)는 코로나19 바이러스로 어려움을 겪고 있는 대구광역시에 행복박스를 전달했다고 10일 밝혔다. 
 
-&lt;o&gt;1967&lt;/o&gt;년 프로 야구 드래프트 1순위로 &lt;s&gt;요미우리 자이언츠&lt;/s&gt;에게 입단하면서 등번호는 8번으로 배정되었다. 
+&lt;O-DAT&gt;1967&lt;/O-DAT&gt;년 프로 야구 드래프트 1순위로 &lt;S-ORG&gt;요미우리 자이언츠&lt;/S-ORG&gt;에게 입단하면서 등번호는 8번으로 배정되었다. 
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="section" id="klue-bert-base">
-<h1>klue/bert-base 토크나이저 가져오기<a class="headerlink" href="#klue-bert-base" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="tokenizer-load">
+<h2>Tokenizer load<a class="headerlink" href="#tokenizer-load" title="Permalink to this headline">¶</a></h2>
+<p>전처리를 위해 tokenizer로 데이터를 인코딩하는 과정이 필요합니다. transformers 라이브러리의 tokenizer 모듈로 모델이 입력받는 포맷으로 변환할 수 있습니다.</p>
+<p>본 노트북에서는 AutoTokenizer.from_pretrained를 이용해 KLUE의 bert base pretrianed model에서 사용된 tokenizer로 데이터를 인코딩 하겠습니다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="s1">&#39;klue/bert-base&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s1">&#39;klue/bert-base&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "3f1dbce520a64e17a84562ef056e82be", "version_major": 2, "version_minor": 0}
+</script><script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "f17613f47958499a9dd0af83e7839ce8", "version_major": 2, "version_minor": 0}
+</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.7/dist-packages/transformers/configuration_utils.py:337: UserWarning: Passing `gradient_checkpointing` to a config initialization is deprecated and will be removed in v5 Transformers. Using `model.gradient_checkpointing_enable()` instead, or if you are using the `Trainer` API, pass `gradient_checkpointing=True` in your `TrainingArguments`.
+  &quot;Passing `gradient_checkpointing` to a config initialization is deprecated and will be removed in v5 &quot;
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "b8e2b871818f4aa392637b7a1e6a8e44", "version_major": 2, "version_minor": 0}
+</script><script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "16e88d55c3a7429da4e7dca00fc671d9", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>토큰화 결과 보기</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ex_encoding</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;sentence&#39;</span><span class="p">],</span>
+                        <span class="n">max_length</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+                        <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;max_length&#39;</span><span class="p">,</span>
+                        <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ex_encoding</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;input_ids&#39;: [2, 168, 30985, 14451, 7088, 4586, 169, 793, 8373, 14113, 2234, 2052, 1363, 2088, 29830, 2116, 14879, 2440, 6711, 170, 21406, 26713, 2076, 25145, 5749, 171, 1421, 818, 2073, 4388, 2062, 18, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], &#39;token_type_ids&#39;: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], &#39;attention_mask&#39;: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="section" id="token">
 <h2>token 추가하기<a class="headerlink" href="#token" title="Permalink to this headline">¶</a></h2>
-<p>__sentence__에 추가한 subject, object 토큰들을 토크나이저에 등록해야 해당 token들이 token화 되지 않는다.</p>
+<p>sentence에 추가한 subject, object 토큰들을 토크나이저에 등록해야 해당 token들이 일반 문자로 인식되지 않고 token화 되지도 않습니다.</p>
+<ol class="simple">
+<li><p>모든 경우의 타입들 저장</p></li>
+</ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_enrollment_tokens</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;additional_special_tokens&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;&lt;o&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;/o&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;s&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;/s&gt;&#39;</span><span class="p">]}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#train</span>
+<span class="n">types</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32470</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;subject_entity&#39;</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+        <span class="n">types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;subject_entity&#39;</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">])</span>
+    
+    <span class="k">if</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;object_entity&#39;</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+        <span class="n">types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;object_entity&#39;</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">])</span>
+
+<span class="c1">#validation</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7765</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;validation&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;subject_entity&#39;</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+        <span class="n">types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;validation&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;subject_entity&#39;</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">])</span>
+    
+    <span class="k">if</span> <span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;validation&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;object_entity&#39;</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+        <span class="n">types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;validation&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s1">&#39;object_entity&#39;</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">])</span>
+
+<span class="n">entity_types</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+    <span class="n">entity_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;S-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="n">entity_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;O-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+
+<span class="n">entity_types</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;S-ORG&#39;,
+ &#39;O-ORG&#39;,
+ &#39;S-PER&#39;,
+ &#39;O-PER&#39;,
+ &#39;S-DAT&#39;,
+ &#39;O-DAT&#39;,
+ &#39;S-LOC&#39;,
+ &#39;O-LOC&#39;,
+ &#39;S-POH&#39;,
+ &#39;O-POH&#39;,
+ &#39;S-NOH&#39;,
+ &#39;O-NOH&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>entity type : ORG, PER, DAT, LOC, POH, NOH</p>
+<p>각각의 타입들을 subject, object로 변환하면, 최종적으로 12개의 type tokens 생성됩니다.</p>
+<ol class="simple">
+<li><p>타입 토큰 추가</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_enrollment_tokens</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;additional_special_tokens&#39;</span><span class="p">:</span> <span class="n">entity_types</span><span class="p">}</span>
 <span class="n">enrollment_tokens</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">add_special_tokens</span><span class="p">(</span><span class="n">new_enrollment_tokens</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>학습에 필요한 값 설정</p>
+</div>
+</div>
+<div class="section" id="data-loader">
+<h1>04 Data Loader<a class="headerlink" href="#data-loader" title="Permalink to this headline">¶</a></h1>
+<p>학습에 사용하는 데이터셋과 데이터 로더 만들기</p>
+<p>학습 setting 값 설정</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">8</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#dataLoader </span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">8</span>
+
+<span class="c1"># model</span>
 <span class="n">num_labels</span> <span class="o">=</span> <span class="mi">30</span>
+
+<span class="c1"># train</span>
 <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">1e-5</span>
 <span class="n">weight_decay</span> <span class="o">=</span> <span class="mf">0.0</span>
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="id4">
-<h2>학습 데이터셋과 데이터로더 만들기<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>setting 값 설명</p>
+<ul class="simple">
+<li><p>batch_size : 데이터 로더 생성시 필요한 배치 사이즈 설정</p></li>
+<li><p>num_labels : 모델 불러올때 필요한 label 개수</p></li>
+<li><p>learning_rate : 학습시의 학습률</p></li>
+<li><p>weight_decay : Weight가 커질경우에 대한 패널티 항목</p></li>
+</ul>
+<div class="section" id="id2">
+<h2>학습 데이터셋과 데이터로더 만들기<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">makeDataset</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
@@ -661,9 +974,17 @@ K리그2에서 성적 1위를 달리고 있는 &lt;s&gt;광주FC&lt;/s&gt;는 �
                                    <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;max_length&#39;</span><span class="p">,</span>
                                    <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span>
+    
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">encodings</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="n">item</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">item</span>
+    
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">)</span>
 
-<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">KlueReDataset</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">train_sentences</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">)</span>
-<span class="n">val_dataset</span> <span class="o">=</span> <span class="n">KlueReDataset</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">val_sentences</span><span class="p">,</span> <span class="n">val_labels</span><span class="p">)</span>
+<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">makeDataset</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">train_sentences</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">)</span>
+<span class="n">val_dataset</span> <span class="o">=</span> <span class="n">makeDataset</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">val_sentences</span><span class="p">,</span> <span class="n">val_labels</span><span class="p">)</span>
 
 <span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">val_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">val_dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -673,28 +994,346 @@ K리그2에서 성적 1위를 달리고 있는 &lt;s&gt;광주FC&lt;/s&gt;는 �
 </div>
 </div>
 </div>
-<div class="section" id="id5">
-<h1>klue/bert-base 모델을 로드하기<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="fine-tuning">
+<h1>05 Fine-tuning<a class="headerlink" href="#fine-tuning" title="Permalink to this headline">¶</a></h1>
+<p>KLUE-RE task 중 Pretrained model 을 사용하여 fine-tuning을 합니다.</p>
+<div class="section" id="model-load">
+<h2>Model load¶<a class="headerlink" href="#model-load" title="Permalink to this headline">¶</a></h2>
+<p>Pretrained model을 다운 받아 fine tuning 을 진행합니다. RE task는 분류와 관련한 task 이므로 , AutoModelForSequenceClassification 클래스를 사용하며, 이때는 label 개수에 대한 설정이 필요합니다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForSequenceClassification</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">num_labels</span><span class="o">=</span><span class="n">num_labels</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForSequenceClassification</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">num_labels</span><span class="o">=</span><span class="n">num_labels</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Some weights of the model checkpoint at klue/bert-base were not used when initializing BertForSequenceClassification: [&#39;cls.predictions.decoder.bias&#39;, &#39;cls.predictions.decoder.weight&#39;, &#39;cls.seq_relationship.weight&#39;, &#39;cls.predictions.transform.LayerNorm.weight&#39;, &#39;cls.predictions.transform.LayerNorm.bias&#39;, &#39;cls.predictions.bias&#39;, &#39;cls.predictions.transform.dense.weight&#39;, &#39;cls.seq_relationship.bias&#39;, &#39;cls.predictions.transform.dense.bias&#39;]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.7/dist-packages/transformers/configuration_utils.py:337: UserWarning: Passing `gradient_checkpointing` to a config initialization is deprecated and will be removed in v5 Transformers. Using `model.gradient_checkpointing_enable()` instead, or if you are using the `Trainer` API, pass `gradient_checkpointing=True` in your `TrainingArguments`.
+  &quot;Passing `gradient_checkpointing` to a config initialization is deprecated and will be removed in v5 &quot;
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "a792d66b9fd541d5b7c80e82746ed62a", "version_major": 2, "version_minor": 0}
+</script><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Some weights of the model checkpoint at klue/bert-base were not used when initializing BertForSequenceClassification: [&#39;cls.predictions.transform.dense.bias&#39;, &#39;cls.seq_relationship.weight&#39;, &#39;cls.predictions.bias&#39;, &#39;cls.predictions.decoder.weight&#39;, &#39;cls.predictions.transform.LayerNorm.weight&#39;, &#39;cls.predictions.transform.dense.weight&#39;, &#39;cls.seq_relationship.bias&#39;, &#39;cls.predictions.decoder.bias&#39;, &#39;cls.predictions.transform.LayerNorm.bias&#39;]
 - This IS expected if you are initializing BertForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
 - This IS NOT expected if you are initializing BertForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
-Some weights of BertForSequenceClassification were not initialized from the model checkpoint at klue/bert-base and are newly initialized: [&#39;classifier.weight&#39;, &#39;classifier.bias&#39;]
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at klue/bert-base and are newly initialized: [&#39;classifier.bias&#39;, &#39;classifier.weight&#39;]
 You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="embedding-resize">
-<h2>Embedding resize<a class="headerlink" href="#embedding-resize" title="Permalink to this headline">¶</a></h2>
-<p>지금의 BERT Embedding Layer에는 추가했던 subject, object의 4개 토큰 정보가 반영되지 않았기 때문에  __index error__가 발생!</p>
-<p>때문에 Embedding Layer의 input이 32000에서 32004로 resize해준다!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BertForSequenceClassification(
+  (bert): BertModel(
+    (embeddings): BertEmbeddings(
+      (word_embeddings): Embedding(32000, 768, padding_idx=0)
+      (position_embeddings): Embedding(512, 768)
+      (token_type_embeddings): Embedding(2, 768)
+      (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (encoder): BertEncoder(
+      (layer): ModuleList(
+        (0): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+        (1): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+        (2): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+        (3): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+        (4): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+        (5): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+        (6): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+        (7): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+        (8): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+        (9): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+        (10): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+        (11): BertLayer(
+          (attention): BertAttention(
+            (self): BertSelfAttention(
+              (query): Linear(in_features=768, out_features=768, bias=True)
+              (key): Linear(in_features=768, out_features=768, bias=True)
+              (value): Linear(in_features=768, out_features=768, bias=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (output): BertSelfOutput(
+              (dense): Linear(in_features=768, out_features=768, bias=True)
+              (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+          (intermediate): BertIntermediate(
+            (dense): Linear(in_features=768, out_features=3072, bias=True)
+          )
+          (output): BertOutput(
+            (dense): Linear(in_features=3072, out_features=768, bias=True)
+            (LayerNorm): LayerNorm((768,), eps=1e-12, elementwise_affine=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+    )
+    (pooler): BertPooler(
+      (dense): Linear(in_features=768, out_features=768, bias=True)
+      (activation): Tanh()
+    )
+  )
+  (dropout): Dropout(p=0.1, inplace=False)
+  (classifier): Linear(in_features=768, out_features=30, bias=True)
+)
+</pre></div>
+</div>
+</div>
+</div>
+<p>##Embedding Layer을 resize¶
+Bert에는 토큰들의 id에 따른 임베딩 값을 반환하는 Embedding Layer가 존재합니다.</p>
+<p>하지만 불러온 Embedding Layer에는 추가한 타입 토큰에 대한 정보가 반영 안된 상태여서 추가한 토큰들이 입력으로 주어질 경우 index error가 발생합니다.</p>
+<p>따라서 Bert의 Embedding Layer를 input 차원이 32000에서 32012로 추가한 토큰 12만큼 증가하도록 resize합니다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">resize_token_embeddings</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">))</span>
@@ -702,12 +1341,12 @@ You should probably TRAIN this model on a down-stream task to be able to use it 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Embedding(32004, 768)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Embedding(32016, 768)
 </pre></div>
 </div>
 </div>
 </div>
-<p>학습 도중 Loss, Accuracy 계산 및 저장을 간단하게 하기 위해 AverageMeter를 클래스를 이용합니다.</p>
+<p>학습 시의 Loss, Accuracy 계산 및 저장을 간단하게 하기 위해 AverageMeter를 클래스를 이용합니다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AverageMeter</span><span class="p">():</span>
@@ -726,11 +1365,9 @@ You should probably TRAIN this model on a down-stream task to be able to use it 
 </div>
 </div>
 </div>
-</div>
 <div class="section" id="model-fine-tuning">
-<h2>model fine-tuning<a class="headerlink" href="#model-fine-tuning" title="Permalink to this headline">¶</a></h2>
+<h3>model fine-tuning<a class="headerlink" href="#model-fine-tuning" title="Permalink to this headline">¶</a></h3>
 <p>BERT-base 모델을 fine-tuning합니다.</p>
-<p>구글 코랩에서 epoch 당 25~30분 정도가 소요됍니다.(ㄷㄷ)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_model</span><span class="p">(</span><span class="n">data_loader</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">criterion</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -815,9 +1452,11 @@ You should probably TRAIN this model on a down-stream task to be able to use it 
 </div>
 </div>
 </div>
-<div class="section" id="id6">
-<h2>결과 확인<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
-<p>실제 20개의 head 데이터로 확인 결과 3개 제외한 답이 정답이였다.</p>
+</div>
+</div>
+<div class="section" id="test">
+<h1>06 Test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h1>
+<p>결과를 확인 해봅니다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
@@ -859,10 +1498,9 @@ label : 18, 추측 값 : tensor([18], device=&#39;cuda:0&#39;)
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="id7">
-<h2>모델 평가하기<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
-<p>F1 score의 성능만 일단 측정한다.</p>
+<p>처음 20개의 validation 데이터 비교시 3개를 제외한 데이터들이 일치했습니다</p>
+<div class="section" id="f1-score">
+<h2>F1 score로 모델 평가하기<a class="headerlink" href="#f1-score" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calc_f1_score</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
